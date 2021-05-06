@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+		.container {
+			width: 1000px;
+		}
+
+        td {
+            text-align: center;
+        }
+
+        table {
+
+        }
+	</style>
+
+</head>
+<body>
+
+    <div class = "container">
+        <div class = "d-flex">
+            <div class = "flex-grow-1 bg-light me-1 da">
+                game board
+            </div>
+            <div class = "bg-light p-2">
+                <div id = "Scoreboard">
+                    <table class = "table table-bordered">
+                        <thead class = "table-darkx">
+                            <tr>
+                              <th scope="col" class = "table-dark">Categories</th>
+                              <th scope="col">Player A</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "table-body">
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-1-fill me-1"></i>Aces</th>
+                                <td id = "AcesValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-2-fill me-1"></i>Duces</th>
+                                <td id = "DucesValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-3-fill me-1"></i>Trees</th>
+                                <td id = "TreesValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-4-fill me-1"></i>Fours</th>
+                                <td id = "FoursValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-5-fill me-1"></i>Fives</th>
+                                <td id = "FivesValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-dice-6-fill me-1"></i>Sixes</th>
+                                <td id = "SixesValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-border-all me-1"></i>Choice</th>
+                                <td id = "ChoiceValA"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+
+    <!--<script src="lodash.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+
+    <script>
+        let diceList = [];
+        let diceCounter = [0, 0, 0, 0, 0, 0, 0];
+        let tagList = ["AcesVal", "DucesVal", "TreesVal", "FoursVal", "FivesVal", "SixesVal"];
+        let playerList = ["A"];
+
+        for(let i = 1; i <= 5; i++) {
+            let dice = {
+                diceNum : i,
+                diceVal : i,
+            };
+            diceList.push(dice);
+        }//make dices
+
+        countDice();
+        drawUpper();
+
+        function countDice() {
+            for(let dice of diceList) {
+                diceCounter[dice.diceVal]++;
+            }
+        } // index: Kinds of dice val, diceCounter[index] = Number of dice.
+
+        function drawUpper() {
+            let tbody = document.querySelector("#table-body");
+            let scoreSpace;
+            let choice = 0;
+
+            for(let i = 0; i < 6; i++) {
+                scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[0]);
+                if(!scoreSpace.className) scoreSpace.textContent = diceCounter[i+1]; // class에 암것도 없으면 draw
+                else console.log('Oops this value is confirmed');
+
+                choice = choice + (i + 1) * diceCounter[i + 1];
+            }
+
+            scoreSpace = document.querySelector("#ChoiceValA");
+            if(!scoreSpace.className) scoreSpace.textContent = choice;
+
+            diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
+        }
+
+        let isTurn = false;
+        let testVal = 3;
+        let blank = document.querySelector("#AcesValA");
+        console.log(blank);
+        blank.addEventListener("click", () => {
+            if(blank.className) return;
+            if(!isTurn) return; // 턴이 아니면 눌러도 반응x
+            blank.textContent = testVal;
+            blank.className = "confirm";
+            drawUpper();
+        })
+
+    </script>
+</body>
+</html>
