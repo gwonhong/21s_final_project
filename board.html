@@ -15,10 +15,7 @@
 
         td {
             text-align: center;
-        }
-
-        table {
-
+            width: 85px;
         }
 	</style>
 
@@ -39,7 +36,7 @@
                               <th scope="col">Player A</th>
                             </tr>
                         </thead>
-                        <tbody id = "table-body">
+                        <tbody id = "upper-body">
                             <tr>
                                 <th scope="row"><i class="bi bi-dice-1-fill me-1"></i>Aces</th>
                                 <td id = "AcesValA"></td>
@@ -64,9 +61,23 @@
                                 <th scope="row"><i class="bi bi-dice-6-fill me-1"></i>Sixes</th>
                                 <td id = "SixesValA"></td>
                             </tr>
+                            
+                        </tbody>
+                    </table>
+
+                    <table class = "table table-bordered">
+                        <tbody id = "lower-body">
                             <tr>
                                 <th scope="row"><i class="bi bi-border-all me-1"></i>Choice</th>
                                 <td id = "ChoiceValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-border-all me-1"></i>4 of a Kind</th>
+                                <td id = "fourofaKindValA"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="bi bi-border-all me-1"></i>Full House</th>
+                                <td id = "FullhouseValA"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,8 +116,10 @@
             }
         } // index: Kinds of dice val, diceCounter[index] = Number of dice.
 
+        
+
         function drawUpper() {
-            let tbody = document.querySelector("#table-body");
+            let tbody = document.querySelector("#upper-body");
             let scoreSpace;
             let choice = 0;
 
@@ -118,10 +131,35 @@
                 choice = choice + (i + 1) * diceCounter[i + 1];
             }
 
-            scoreSpace = document.querySelector("#ChoiceValA");
-            if(!scoreSpace.className) scoreSpace.textContent = choice;
+            for(let player of playerList) {
+                scoreSpace = document.querySelector("#ChoiceVal" + player);
+                if(!scoreSpace.className) scoreSpace.textContent = choice;
+
+                scoreSpace = document.querySelector("#fourofaKindVal" + player);
+                scoreSpace.textContent = !scoreSpace.className && diceCounter.some(val => {val >= 4;}) ? choice : 0;
+
+                scoreSpace = document.querySelector("#FullhouseVal" + player);
+                if(!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
+            }
 
             diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
+        }
+
+        function fullhouseCheck() {
+            let num2 = 0;
+            let num3 = 0;
+            let fullhouse = 0;
+
+            for(let i = 1; i <= 6; i++) {
+                if(diceCounter[i] === 2) {
+                    num2 = i * 2;
+                } else if (diceCounter[i] === 3) {
+                    num3 = i * 3;
+                }
+            }
+
+            if(num2 && num3) fullhouse = num2 + num3
+            return fullhouse;
         }
 
         let isTurn = false;
