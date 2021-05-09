@@ -79,6 +79,18 @@
                                 <th scope="row"><i class="bi bi-border-all me-1"></i>Full House</th>
                                 <td id = "FullhouseValA"></td>
                             </tr>
+                            <tr>
+                              <th scope="row"><i class="bi bi-border-all me-1"></i>Small Straight</th>
+                              <td id = "v15A"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><i class="bi bi-border-all me-1"></i>Large Straight</th>
+                              <td id = "v30A"></td>
+                           </tr>
+                            <tr>
+                              <th scope="row"><i class="bi bi-border-all me-1"></i>Yacht</th>
+                              <td id = "YachtA"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -97,6 +109,7 @@
         let diceList = [];
         let diceCounter = [0, 0, 0, 0, 0, 0, 0];
         let tagList = ["AcesVal", "DucesVal", "TreesVal", "FoursVal", "FivesVal", "SixesVal"];
+        let tagList2 = ["ChoiceVal", "fourofaKindVal", "FullhouseVal", "v15", "v30","Yacht"];
         let playerList = ["A"];
 
         for(let i = 1; i <= 5; i++) {
@@ -108,7 +121,7 @@
         }//make dices
 
         countDice();
-        drawUpper();
+        drawScore();
 
         function countDice() {
             for(let dice of diceList) {
@@ -118,11 +131,13 @@
 
         
 
-        function drawUpper() {
+        function drawScore() {
             let tbody = document.querySelector("#upper-body");
             let scoreSpace;
             let choice = 0;
+            let straight = 0; let v15 = 0; let v30 = 0;
 
+            // Upper Categories
             for(let i = 0; i < 6; i++) {
                 scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[0]);
                 if(!scoreSpace.className) scoreSpace.textContent = diceCounter[i+1]; // class에 암것도 없으면 draw
@@ -131,6 +146,7 @@
                 choice = choice + (i + 1) * diceCounter[i + 1];
             }
 
+            //Lower Categories
             for(let player of playerList) {
                 scoreSpace = document.querySelector("#ChoiceVal" + player);
                 if(!scoreSpace.className) scoreSpace.textContent = choice;
@@ -140,6 +156,23 @@
 
                 scoreSpace = document.querySelector("#FullhouseVal" + player);
                 if(!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
+
+                straight = StraightCheck();
+                if(straight === 30) {
+                  v15 = 15; v30 = 30;
+                } else if (straight === 15) {
+                  v15 = 15; v30 = 0;
+                } else {
+                  v15 = 0; v30 = 0;
+                }
+                scoreSpace = document.querySelector("#v" + 30 + player);
+                if(!scoreSpace.className) scoreSpace.textContent = v30;
+                scoreSpace = document.querySelector("#v" + 15 + player);
+                if(!scoreSpace.className) scoreSpace.textContent = v15;
+
+                scoreSpace = document.querySelector("#Yacht" + player);
+                scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0; 
+                
             }
 
             diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
@@ -162,17 +195,32 @@
             return fullhouse;
         }
 
-        let isTurn = false;
-        let testVal = 3;
-        let blank = document.querySelector("#AcesValA");
-        console.log(blank);
-        blank.addEventListener("click", () => {
-            if(blank.className) return;
+        function StraightCheck() {
+          let isStart = false;
+          let straight = 0;
+
+          for(let val of diceCounter.slice(1, 7)) {
+            if(isStart === true && val === 0) break;
+            if(val > 0) {
+              isStart = true;
+              straight++;
+            }
+          }
+
+          return straight >= 4 ? straight >= 5 ? 30 : 15 : 0;
+        }
+
+        let isTurn = true;
+        for(let tagName of tagList.concat(tagList2)) {
+          let blank = document.querySelector("#" + tagName + "A");
+          //console.log(blank);
+          blank.addEventListener("click", () => {
+            if(blank.className) return; // 확정 되면 눌러도 반응X
             if(!isTurn) return; // 턴이 아니면 눌러도 반응x
-            blank.textContent = testVal;
             blank.className = "confirm";
-            drawUpper();
-        })
+            console.log("Yeaaa " + tagName);
+          })
+        }
 
     </script>
 </body>
