@@ -22,8 +22,18 @@
   </div>
 
   <script language="javascript" type="text/javascript">
+    var body = document.querySelector('body');
     var startButton = document.querySelector('#start');
     startButton.addEventListener('click', () => {
+      // for (let i = 100; i >= 0; i--) {
+      //   setTimeout(() => {
+      //     body.style.opacity = i / 100;
+      //   }, 5);
+      // }
+      // setTimeout(() => {
+      //   window.location.href = 'board.html';
+      // }, 500);
+      //tried to fade out body but failed
       window.location.href = 'board.html';
     });
     var closeButton = document.querySelector('#close');
