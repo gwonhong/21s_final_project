@@ -30,10 +30,6 @@ h1 {
 
 /*start button funnier*/
 
-/* toggle this class */
-.color-bg-start {
-  background-color: cornflowerblue;
-}
 
 /* toggle class bg-animate-color */
 .bg-animate-color {
@@ -51,27 +47,17 @@ h1 {
   }
 }
 .fun-btn {
-  /* change bg color to get different hues    */
-  background-color: salmon;
+  background-color: lightskyblue;
   color: white;
-  padding: 1em;
   border: none;
   transition: all .3s ease;
-  border-radius: 5px;
+  border-radius: 4px;
   outline: none;
-  align-self: center;
   cursor: pointer;
-  font-weight: bold;
 }
 
 .fun-btn:hover {
   animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
-}
-
-.start-fun {
-  background-color: #fff !important;
-  /* change color of button text when fun is started   */
-  color: salmon !important;
 }
 
 /* pulsating effect on button */
