@@ -12,7 +12,7 @@
   <title>Yacht Dice</title>
 </head>
 
-<body>
+<body onload="document.body.style.opacity='1'">
   <h1>요트 다이스</h1>
   <div id=menu class="w-50 shadow p-3 mb-5 rounded d-grid gap-2">
     <button id="start" type="button" class="fun-btn btn-lg">게임시작</button>
@@ -25,16 +25,10 @@
     var body = document.querySelector('body');
     var startButton = document.querySelector('#start');
     startButton.addEventListener('click', () => {
-      // for (let i = 100; i >= 0; i--) {
-      //   setTimeout(() => {
-      //     body.style.opacity = i / 100;
-      //   }, 5);
-      // }
-      // setTimeout(() => {
-      //   window.location.href = 'board.html';
-      // }, 500);
-      //tried to fade out body but failed
-      window.location.href = 'board.html';
+      body.className+=' fade-out';
+      setTimeout(() => {
+        window.location.href = 'board.html';
+      }, 450);
     });
     var closeButton = document.querySelector('#close');
     closeButton.addEventListener('click', () => {

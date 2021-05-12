@@ -1,15 +1,12 @@
-/*color set
-sea glass = #B2D6CA
-poppy = #FE5858
-pine = #024B40
-merlot = #5D353E
-*/
-
 body {
   font-family: 'Do Hyeon', sans-serif;
   background-image: url("riho-kroll-m4sGYaHYN5o-unsplash_1080.jpg");
   background-size: cover;
   height: 100%;
+
+  opacity: 0;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s; /* Safari */
 }
 
 h1 {
@@ -28,16 +25,64 @@ h1 {
   height: 300px;
 }
 
+
+.fade-out {
+  animation: fadeOut ease 0.5s;
+  -webkit-animation: fadeOut ease 0.5s;
+  -moz-animation: fadeOut ease 0.5s;
+  -o-animation: fadeOut ease 0.5s;
+  -ms-animation: fadeOut ease 0.5s;
+}
+@keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-moz-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-o-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-ms-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
 /*start button funnier*/
-
-
-/* toggle class bg-animate-color */
 .bg-animate-color {
   animation: random-bg .5s linear infinite;
 }
-
 /* add animation to bg color  */
-
 @keyframes random-bg {
   from {
     filter: hue-rotate(0);
@@ -55,11 +100,9 @@ h1 {
   outline: none;
   cursor: pointer;
 }
-
 .fun-btn:hover {
   animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
 }
-
 /* pulsating effect on button */
 @keyframes grow {
   0% {
