@@ -14,7 +14,7 @@
   <style>
     .container {
       width: 1000px;
-    }
+    } /*<!-- inline으로 해야겠다-->*/
 
     td {
       text-align: center;
@@ -26,27 +26,25 @@
 
 <body>
 
-  <div class="container">
+  <div class="container" style="width: 1000px;" id="root">
     <div class="d-flex">
       <div class="flex-grow-1 bg-light me-1 da">
         game board
     
         <div class="layer_popup" id="pop">
           <div class="layer">
-
             <div class="text_area">
               <p> So implement your design and place content here! If you want to close modal, please hit "Esc", click somewhere
                 on the cereen or use special button.
               </p>
             </div>
-
             <div class="btn_area">
-              <button class="btn_git">Avgrund on Github</button>
-              <button class="btn_twitter">Twitter</button>
-              <button class="btn_Dribbble">Dribbble</button>
+              <form class="d-flex">
+                <input type="text" class="form-control me-1 w-50 ms-auto" id="Input1" placeholder="Player Num">
+                <button class="btn btn-outline-success" type="button" id="confirmBtn">Confirm</button>
+              </form>
             </div>
-
-            <button class="btn_close" id="close">CLOSE</button>
+            <!--<button class="btn_close" id="close">CLOSE</button>-->
           </div>
           <div class="dimmed"></div>
         </div>
@@ -56,7 +54,7 @@
         <div id="Scoreboard">
           <table class="table table-bordered">
             <thead class="table-darkx">
-              <tr>
+              <tr id="t-head">
                 <th scope="col" class="table-dark">Categories</th>
                 <th scope="col">Player A</th>
               </tr>
@@ -136,6 +134,7 @@
     let tagList = ["AcesVal", "DucesVal", "TreesVal", "FoursVal", "FivesVal", "SixesVal"];
     let tagList2 = ["ChoiceVal", "fourofaKindVal", "FullhouseVal", "v15", "v30", "Yacht"];
     let playerList = ["A"];
+    let playerNum;
 
     for (let i = 1; i <= 5; i++) {
       let dice = {
@@ -172,7 +171,7 @@
       }
 
       //Lower Categories
-      for (let player of playerList) {
+      for (let player of playerList) { // 그냥 루프 시킬께 아니라 누구 턴인지 입력받고 그거에 따라 player가 바껴야지
         scoreSpace = document.querySelector("#ChoiceVal" + player);
         if (!scoreSpace.className) scoreSpace.textContent = choice;
 
@@ -248,13 +247,59 @@
     }
   </script>
 
+  <!-- Input Player Num-->
   <script>
     let popup = document.querySelector("#pop");
-    let closeMenu = document.querySelector("#close");
+    let closeMenu = document.querySelector("#confirmBtn");
+    let container = document.querySelector("#root");
+    let form = document.querySelector("#Input1");
 
-    closeMenu.addEventListener("click", () => {
+    closeMenu.addEventListener("click", () => { // 사실 remove버튼은 없어햐함
       popup.remove();
+      if(form.value === "") playerNum = 1;
+      else playerNum = form.value;
+      addPlayer();
+
+      //size 조절
+      let size = 85 * (playerNum - 1) + 1000;
+      container.setAttribute("style", "width: " + size + "px");
     })
+  </script>
+
+  <!-- APPEN LIST-->
+  <script> 
+    let tableHead = document.querySelector("#t-head");
+    let tUbody = document.querySelector("#upper-body");
+    let tLbody = document.querySelector("#lower-body");
+
+    let nameList = ["B", "C", "D"];
+
+    function addPlayer() {
+      for(let i = 0; i < (playerNum - 1); i++) {
+        let tHeadElement = document.createElement("th");
+        tHeadElement.setAttribute("scope", "col");
+        tHeadElement.textContent = "Player " + nameList[i];
+        tableHead.appendChild(tHeadElement);
+
+        addPlayerInUpper(i);
+      }
+    }
+
+    function addPlayerInUpper(i) {
+      for(let j = 0; j < 6; j++) {
+        let tUbodyRow = tUbody.children[j];
+        let tUbodyElement = document.createElement("td");
+        tUbodyElement.id = tagList[j] + nameList[i];
+        tUbodyRow.appendChild(tUbodyElement);
+
+
+        let tLbodyRow = tLbody.children[j];
+        let tLbodyElement = document.createElement("td");
+        tLbodyElement.id = tagList2[j] + nameList[i];
+        tLbodyRow.appendChild(tLbodyElement);
+        console.log(tLbodyElement);
+      }
+    }
   </script>
 </body>
 
