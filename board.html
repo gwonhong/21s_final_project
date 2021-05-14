@@ -205,16 +205,11 @@
       diceList.push(dice);
     }//make dices
 
-    countDice();
-    drawScore();
-
     function countDice() {
       for (let dice of diceList) {
         diceCounter[dice.diceVal]++;
       }
     } // index: Kinds of dice val, diceCounter[index] = Number of dice.
-
-
 
     function drawScore() {
       let tbody = document.querySelector("#upper-body");
@@ -232,7 +227,6 @@
       }
 
       //Lower Categories
-      //for (let player of playerList) { // 그냥 루프 시킬께 아니라 누구 턴인지 입력받고 그거에 따라 player가 바껴야지
       let player = playerList[whosTurn];
       scoreSpace = document.querySelector("#ChoiceVal" + player);
       if (!scoreSpace.className) scoreSpace.textContent = choice;
@@ -295,18 +289,17 @@
     }
   </script>
 
+  <!--Listener-->
   <script>
-
     let isTurn = true;
     function appendListener() {
-
       for (let tagName of tagList.concat(tagList2)) {
         for (let turn of playerList) {
           let blank = document.querySelector("#" + tagName + turn);
-          //console.log(blank);
           blank.addEventListener("click", () => {
             if (blank.className) return; // 확정 되면 눌러도 반응X
             if (!isTurn) return; // 턴이 아니면 눌러도 반응x
+            if (turn != playerList[whosTurn]) return; //자신 턴 아니면 반응x
             blank.className = "confirm";
             console.log("Yeaaa " + tagName + " " + turn);
           })
@@ -322,13 +315,14 @@
     let container = document.querySelector("#root");
     let form = document.querySelector("#Input1");
 
-    closeMenu.addEventListener("click", () => { // 사실 remove버튼은 없어햐함
+    closeMenu.addEventListener("click", () => {
       popup.remove();
       if(form.value === "") playerNum = 1;
       else playerNum = form.value;
       addPlayer();
       appendListener();
-      //console.log(playerList);
+      countDice();
+      drawScore();
 
       //size 조절
       let size = 85 * (playerNum - 1) + 1000;
@@ -371,7 +365,6 @@
         let tLbodyElement = document.createElement("td");
         tLbodyElement.id = tagList2[j] + nameList[i];
         tLbodyRow.appendChild(tLbodyElement);
-        //console.log(tLbodyElement);
       }
     }
   </script>

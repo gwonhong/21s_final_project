@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" type="text/css" href="popup.css">
+
+  <style>
+    .container {
+      width: 1000px;
+    } /*<!-- inline으로 해야겠다-->*/
+
+    td {
+      text-align: center;
+      width: 85px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container" style="width: 1000px;" id="root">
+    <div class="d-flex">
+      <div class="flex-grow-1 bg-light me-1 da">
+        game board
+    
+        <div class="layer_popup" id="pop">
+          <div class="layer">
+            <div class="text_area">
+              <p> So implement your design and place content here! If you want to close modal, please hit "Esc", click somewhere
+                on the cereen or use special button.
+              </p>
+            </div>
+            <div class="btn_area">
+              <form class="d-flex">
+                <input type="text" class="form-control me-1 w-50 ms-auto" id="Input1" placeholder="Player Num">
+                <button class="btn btn-outline-success" type="button" id="confirmBtn">Confirm</button>
+              </form>
+            </div>
+            <!--<button class="btn_close" id="close">CLOSE</button>-->
+          </div>
+          <div class="dimmed"></div>
+        </div>
+
+      </div>
+      <div class="bg-light p-2">
+        <div id="Scoreboard">
+          <table class="table table-bordered">
+            <thead class="table-darkx">
+              <tr id="t-head">
+                <th scope="col" class="table-dark">Categories</th>
+                <th scope="col">Player A</th>
+              </tr>
+            </thead>
+            <tbody id="upper-body">
+              <tr>
+                <th scope="row"><i class="bi bi-dice-1-fill me-1"></i>Aces</th>
+                <td id="AcesValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-2-fill me-1"></i>Duces</th>
+                <td id="DucesValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-3-fill me-1"></i>Trees</th>
+                <td id="TreesValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-4-fill me-1"></i>Fours</th>
+                <td id="FoursValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-5-fill me-1"></i>Fives</th>
+                <td id="FivesValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-6-fill me-1"></i>Sixes</th>
+                <td id="SixesValA"></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <tbody id="lower-body">
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>Choice</th>
+                <td id="ChoiceValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>4 of a Kind</th>
+                <td id="fourofaKindValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>Full House</th>
+                <td id="FullhouseValA"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>Small Straight</th>
+                <td id="v15A"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>Large Straight</th>
+                <td id="v30A"></td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all me-1"></i>Yacht</th>
+                <td id="YachtA"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+  <!--<script src="lodash.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+
+  <script>
+    let diceList = [];
+    let diceCounter = [0, 0, 0, 0, 0, 0, 0];
+    let tagList = ["AcesVal", "DucesVal", "TreesVal", "FoursVal", "FivesVal", "SixesVal"];
+    let tagList2 = ["ChoiceVal", "fourofaKindVal", "FullhouseVal", "v15", "v30", "Yacht"];
+    let playerList = ["A"];
+    let playerNum;
+    let whosTurn = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      let dice = {
+        diceNum: i,
+        diceVal: i,
+      };
+      diceList.push(dice);
+    }//make dices
+
+    countDice();
+    drawScore();
+
+    function countDice() {
+      for (let dice of diceList) {
+        diceCounter[dice.diceVal]++;
+      }
+    } // index: Kinds of dice val, diceCounter[index] = Number of dice.
+
+
+
+    function drawScore() {
+      let tbody = document.querySelector("#upper-body");
+      let scoreSpace;
+      let choice = 0;
+      let straight = 0; let v15 = 0; let v30 = 0;
+
+      // Upper Categories
+      for (let i = 0; i < 6; i++) {
+        scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[whosTurn]);
+        if (!scoreSpace.className) scoreSpace.textContent = diceCounter[i + 1]; // class에 암것도 없으면 draw
+        else console.log('Oops this value is confirmed');
+
+        choice = choice + (i + 1) * diceCounter[i + 1];
+      }
+
+      //Lower Categories
+      let player = playerList[whosTurn];
+      scoreSpace = document.querySelector("#ChoiceVal" + player);
+      if (!scoreSpace.className) scoreSpace.textContent = choice;
+
+      scoreSpace = document.querySelector("#fourofaKindVal" + player);
+      scoreSpace.textContent = !scoreSpace.className && diceCounter.some(val => { val >= 4; }) ? choice : 0;
+
+      scoreSpace = document.querySelector("#FullhouseVal" + player);
+      if (!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
+
+      straight = StraightCheck();
+      if (straight === 30) {
+          v15 = 15; v30 = 30;
+        } else if (straight === 15) {
+          v15 = 15; v30 = 0;
+        } else {
+          v15 = 0; v30 = 0;
+        }
+      scoreSpace = document.querySelector("#v" + 30 + player);
+      if (!scoreSpace.className) scoreSpace.textContent = v30;
+      scoreSpace = document.querySelector("#v" + 15 + player);
+      if (!scoreSpace.className) scoreSpace.textContent = v15;
+
+      scoreSpace = document.querySelector("#Yacht" + player);
+      scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
+
+      diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
+    }
+
+    function fullhouseCheck() {
+      let num2 = 0;
+      let num3 = 0;
+      let fullhouse = 0;
+
+      for (let i = 1; i <= 6; i++) {
+        if (diceCounter[i] === 2) {
+          num2 = i * 2;
+        } else if (diceCounter[i] === 3) {
+          num3 = i * 3;
+        }
+      }
+
+      if (num2 && num3) fullhouse = num2 + num3
+      return fullhouse;
+    }
+
+    function StraightCheck() {
+      let isStart = false;
+      let straight = 0;
+
+      for (let val of diceCounter.slice(1, 7)) {
+        if (isStart === true && val === 0) break;
+        if (val > 0) {
+          isStart = true;
+          straight++;
+        }
+      }
+
+      return straight >= 4 ? straight >= 5 ? 30 : 15 : 0;
+    }
+  </script>
+
+  <!--점수 확정 리스너-->
+  <script>
+    let isTurn = true;
+    function appendListener() {
+
+      for (let tagName of tagList.concat(tagList2)) {
+        for (let turn of playerList) {
+          let blank = document.querySelector("#" + tagName + turn);
+          blank.addEventListener("click", () => {
+            if (blank.className) return; // 확정 되면 눌러도 반응X
+            if (!isTurn) return; // 턴이 아니면 눌러도 반응x
+            blank.className = "confirm";
+            console.log("Yeaaa " + tagName + " " + turn);
+          })
+        }
+      }
+    }
+  </script>
+
+  <!-- Input Player Num-->
+  <script>
+    let popup = document.querySelector("#pop");
+    let closeMenu = document.querySelector("#confirmBtn");
+    let container = document.querySelector("#root");
+    let form = document.querySelector("#Input1");
+
+    closeMenu.addEventListener("click", () => {
+      popup.remove();
+      if(form.value === "") playerNum = 1;
+      else playerNum = form.value;
+      addPlayer();
+      appendListener();
+
+      //size 조절
+      let size = 85 * (playerNum - 1) + 1000;
+      container.setAttribute("style", "width: " + size + "px");
+    })
+  </script>
+
+  <!-- APPEN LIST-->
+  <script> 
+    let tableHead = document.querySelector("#t-head");
+    let tUbody = document.querySelector("#upper-body");
+    let tLbody = document.querySelector("#lower-body");
+
+    let nameList = ["B", "C", "D"];
+
+    function addPlayer() {
+      for(let i = 0; i < (playerNum - 1); i++) {
+        playerList.push(nameList[i]);
+      }
+
+      for(let i = 0; i < (playerNum - 1); i++) {
+        let tHeadElement = document.createElement("th");
+        tHeadElement.setAttribute("scope", "col");
+        tHeadElement.textContent = "Player " + nameList[i];
+        tableHead.appendChild(tHeadElement);
+
+        addPlayerInUpper(i);
+      }
+    }
+
+    function addPlayerInUpper(i) {
+      for(let j = 0; j < 6; j++) {
+        let tUbodyRow = tUbody.children[j];
+        let tUbodyElement = document.createElement("td");
+        tUbodyElement.id = tagList[j] + nameList[i];
+        tUbodyRow.appendChild(tUbodyElement);
+
+
+        let tLbodyRow = tLbody.children[j];
+        let tLbodyElement = document.createElement("td");
+        tLbodyElement.id = tagList2[j] + nameList[i];
+        tLbodyRow.appendChild(tLbodyElement);
+      }
+    }
+  </script>
+</body>
+
+</html>
