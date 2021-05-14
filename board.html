@@ -291,7 +291,7 @@
 
   <!--Listener-->
   <script>
-    let isTurn = true;
+    let isTurn = false;
     function appendListener() {
       for (let tagName of tagList.concat(tagList2)) {
         for (let turn of playerList) {
@@ -301,6 +301,7 @@
             if (!isTurn) return; // 턴이 아니면 눌러도 반응x
             if (turn != playerList[whosTurn]) return; //자신 턴 아니면 반응x
             blank.className = "confirm";
+            isTurn = false;
             console.log("Yeaaa " + tagName + " " + turn);
           })
         }
@@ -321,8 +322,8 @@
       else playerNum = form.value;
       addPlayer();
       appendListener();
-      countDice();
-      drawScore();
+      //countDice();
+     // drawScore();
 
       //size 조절
       let size = 85 * (playerNum - 1) + 1000;
