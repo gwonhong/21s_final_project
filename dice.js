@@ -25,8 +25,8 @@ function drawFace(n, i) {
     ctx[2] = document.getElementById("3d")
     ctx[3] = document.getElementById("4d")
     ctx[4] = document.getElementById("5d")
-    console.log("adfasdf");
-    console.log(ctx);
+    //console.log("adfasdf");
+    //console.log(ctx);
 
     switch(n) {
         case 1:
@@ -59,9 +59,12 @@ function drawFace(n, i) {
             dv[i] = 6;
             break;
     }
+    
 }
 
 function throwDices() {
+
+    isTurn = false;
     
     chk[0] = document.querySelector("#\\31 dc");
     chk[1] = document.querySelector("#\\32 dc");
@@ -85,4 +88,8 @@ function throwDices() {
         
     }
     
+    countDice();
+    drawScore();
+    isTurn = true;
+    //whosTurn = 
 }
