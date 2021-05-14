@@ -135,6 +135,7 @@
     let tagList2 = ["ChoiceVal", "fourofaKindVal", "FullhouseVal", "v15", "v30", "Yacht"];
     let playerList = ["A"];
     let playerNum;
+    let whosTurn = 0;
 
     for (let i = 1; i <= 5; i++) {
       let dice = {
@@ -163,7 +164,7 @@
 
       // Upper Categories
       for (let i = 0; i < 6; i++) {
-        scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[0]);
+        scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[whosTurn]);
         if (!scoreSpace.className) scoreSpace.textContent = diceCounter[i + 1]; // class에 암것도 없으면 draw
         else console.log('Oops this value is confirmed');
 
@@ -171,33 +172,32 @@
       }
 
       //Lower Categories
-      for (let player of playerList) { // 그냥 루프 시킬께 아니라 누구 턴인지 입력받고 그거에 따라 player가 바껴야지
-        scoreSpace = document.querySelector("#ChoiceVal" + player);
-        if (!scoreSpace.className) scoreSpace.textContent = choice;
+      //for (let player of playerList) { // 그냥 루프 시킬께 아니라 누구 턴인지 입력받고 그거에 따라 player가 바껴야지
+      let player = playerList[whosTurn];
+      scoreSpace = document.querySelector("#ChoiceVal" + player);
+      if (!scoreSpace.className) scoreSpace.textContent = choice;
 
-        scoreSpace = document.querySelector("#fourofaKindVal" + player);
-        scoreSpace.textContent = !scoreSpace.className && diceCounter.some(val => { val >= 4; }) ? choice : 0;
+      scoreSpace = document.querySelector("#fourofaKindVal" + player);
+      scoreSpace.textContent = !scoreSpace.className && diceCounter.some(val => { val >= 4; }) ? choice : 0;
 
-        scoreSpace = document.querySelector("#FullhouseVal" + player);
-        if (!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
+      scoreSpace = document.querySelector("#FullhouseVal" + player);
+      if (!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
 
-        straight = StraightCheck();
-        if (straight === 30) {
+      straight = StraightCheck();
+      if (straight === 30) {
           v15 = 15; v30 = 30;
         } else if (straight === 15) {
           v15 = 15; v30 = 0;
         } else {
           v15 = 0; v30 = 0;
         }
-        scoreSpace = document.querySelector("#v" + 30 + player);
-        if (!scoreSpace.className) scoreSpace.textContent = v30;
-        scoreSpace = document.querySelector("#v" + 15 + player);
-        if (!scoreSpace.className) scoreSpace.textContent = v15;
+      scoreSpace = document.querySelector("#v" + 30 + player);
+      if (!scoreSpace.className) scoreSpace.textContent = v30;
+      scoreSpace = document.querySelector("#v" + 15 + player);
+      if (!scoreSpace.className) scoreSpace.textContent = v15;
 
-        scoreSpace = document.querySelector("#Yacht" + player);
-        scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
-
-      }
+      scoreSpace = document.querySelector("#Yacht" + player);
+      scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
 
       diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
     }
@@ -233,17 +233,25 @@
 
       return straight >= 4 ? straight >= 5 ? 30 : 15 : 0;
     }
+  </script>
+
+  <script>
 
     let isTurn = true;
-    for (let tagName of tagList.concat(tagList2)) {
-      let blank = document.querySelector("#" + tagName + "A");
-      //console.log(blank);
-      blank.addEventListener("click", () => {
-        if (blank.className) return; // 확정 되면 눌러도 반응X
-        if (!isTurn) return; // 턴이 아니면 눌러도 반응x
-        blank.className = "confirm";
-        console.log("Yeaaa " + tagName);
-      })
+    function appendListener() {
+
+      for (let tagName of tagList.concat(tagList2)) {
+        for (let turn of playerList) {
+          let blank = document.querySelector("#" + tagName + turn);
+          //console.log(blank);
+          blank.addEventListener("click", () => {
+            if (blank.className) return; // 확정 되면 눌러도 반응X
+            if (!isTurn) return; // 턴이 아니면 눌러도 반응x
+            blank.className = "confirm";
+            console.log("Yeaaa " + tagName + " " + turn);
+          })
+        }
+      }
     }
   </script>
 
@@ -259,6 +267,8 @@
       if(form.value === "") playerNum = 1;
       else playerNum = form.value;
       addPlayer();
+      appendListener();
+      //console.log(playerList);
 
       //size 조절
       let size = 85 * (playerNum - 1) + 1000;
@@ -275,6 +285,10 @@
     let nameList = ["B", "C", "D"];
 
     function addPlayer() {
+      for(let i = 0; i < (playerNum - 1); i++) {
+        playerList.push(nameList[i]);
+      }
+
       for(let i = 0; i < (playerNum - 1); i++) {
         let tHeadElement = document.createElement("th");
         tHeadElement.setAttribute("scope", "col");
@@ -297,7 +311,7 @@
         let tLbodyElement = document.createElement("td");
         tLbodyElement.id = tagList2[j] + nameList[i];
         tLbodyRow.appendChild(tLbodyElement);
-        console.log(tLbodyElement);
+        //console.log(tLbodyElement);
       }
     }
   </script>
