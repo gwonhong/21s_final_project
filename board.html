@@ -18,14 +18,77 @@
             width: 85px;
         }
 	</style>
-
+    <script src="/C:\OSfinal\test/dice.js"></script>
 </head>
 <body>
 
     <div class = "container">
         <div class = "d-flex">
             <div class = "flex-grow-1 bg-light me-1 da">
-                game board
+                <div id = "Dice">
+                    <table class = "table table-bordered">
+                        <thead class = "table-darkx">
+                            <tr>
+                              <th scope="col" class = "table-dark"> - </th>
+                              <th scope="col">DICE 1</th>
+                              <th scope="col">DICE 2</th>
+                              <th scope="col">DICE 3</th>
+                              <th scope="col">DICE 4</th>
+                              <th scope="col">DICE 5</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "dice-body">
+                            <tr>
+                                <th scope="col">DICE</th>
+                                <th scope="row"><i id = "1d" class="bi bi-dice-1-fill me-1"></i></th>
+                                <th scope="row"><i id = "2d" class="bi bi-dice-2-fill me-1"></i></th>
+                                <th scope="row"><i id = "3d" class="bi bi-dice-3-fill me-1"></i></th>
+                                <th scope="row"><i id = "4d" class="bi bi-dice-4-fill me-1"></i></th>
+                                <th scope="row"><i id = "5d" class="bi bi-dice-5-fill me-1"></i></th>
+                            </tr>
+                        </tbody>
+                        <tbody id = "check-body">
+                            <tr>
+                                <th scope="col">CHECK</th>
+                                <th scope="row">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="1dc" navme = "1dc">
+                                        <label class="form-check-label" for="1dc"></label>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" value="" id="2dc" navme = "3dc">
+                                    <label class="form-check-label" for="sdc">
+                                    </label>
+                                </th>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" value="" id="3dc" navme = "3dc">
+                                    <label class="form-check-label" for="3dc">
+                                    </label>
+                                </th>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" value="" id="4dc" navme = "4dc">
+                                    <label class="form-check-label" for="5dc">
+                                    </label>
+                                </th>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" value="" id="5dc" navme = "5dc">
+                                    <label class="form-check-label" for="5dc">
+                                    </label>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button id="dice_button" onclick="throwDices();" type="button" class="btn btn-primary btn-sm">주사위 던지기</button>
+                
+                <script>
+                    window.onload = function() {
+                        init();
+                    }
+                </script>
+
             </div>
             <div class = "bg-light p-2">
                 <div id = "Scoreboard">
