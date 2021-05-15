@@ -7,14 +7,6 @@ let playerNum;
 let whosTurn = 0;
 let maxRole = 3;
 
-for (let i = 1; i <= 5; i++) {
-  let dice = {
-    diceNum: i,
-    diceVal: i,
-  };
-  diceList.push(dice);
-}//make dices
-
 function countDice() {
   for (let dice of dv) {
     diceCounter[dice]++;

@@ -4,6 +4,7 @@ let closeMenu = document.querySelector("#confirmBtn");
 let container = document.querySelector("#root");
 let form = document.querySelector("#Input1");
 
+//popUp창 닫는 리스너
 closeMenu.addEventListener("click", () => {
   popup.remove();
   if (form.value === "") playerNum = 1;
@@ -34,11 +35,11 @@ function addPlayer() {
     tHeadElement.textContent = "Player " + nameList[i];
     tableHead.appendChild(tHeadElement);
 
-    addPlayerInUpper(i);
+    addCategories(i);
   }
 }
 
-function addPlayerInUpper(i) {
+function addCategories(i) {
   for (let j = 0; j < 6; j++) {
     let tUbodyRow = tUbody.children[j];
     let tUbodyElement = document.createElement("td");

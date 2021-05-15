@@ -1,5 +1,4 @@
 # How to Use Game Board Script?
-# 주의!! countDice는 제가 임의의 리스트를 만들어서 구현한 것이기 때문에 그냥 가져다 쓰면 동작하지 않습니다!!
 
 ## Important Things
 - isTurn

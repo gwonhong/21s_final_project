@@ -11,7 +11,6 @@ var dtx;
 var bn = 0;
 var dv = [];
 
-
 function init() {
     for(var j = 0; j<5; j++){
         var ch = 1 + Math.floor(Math.random() * 6);
@@ -64,6 +63,7 @@ function drawFace(n, i) {
 
 function throwDices() {
 
+    //if(curTurn > maxTurn) return;
     isTurn = false;
     
     chk[0] = document.querySelector("#\\31 dc");
@@ -79,7 +79,7 @@ function throwDices() {
     }
     bn++;
     console.log("bn");
-    if(bn>1){
+    if(bn>=maxTurn){
         dtx = document.getElementById("dice_button")
         dtx.setAttribute("disabled", "true");
         for(var k = 0; k<5; k++){
