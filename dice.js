@@ -63,7 +63,6 @@ function drawFace(n, i) {
 
 function throwDices() {
 
-    //if(curTurn > maxTurn) return;
     isTurn = false;
     
     chk[0] = document.querySelector("#\\31 dc");
@@ -79,7 +78,7 @@ function throwDices() {
     }
     bn++;
     console.log("bn");
-    if(bn>=maxTurn){
+    if(bn>1){
         dtx = document.getElementById("dice_button")
         dtx.setAttribute("disabled", "true");
         for(var k = 0; k<5; k++){
@@ -91,5 +90,4 @@ function throwDices() {
     countDice();
     drawScore();
     isTurn = true;
-    //whosTurn = 
 }
