@@ -36,6 +36,11 @@ function addPlayer() {
     tableHead.appendChild(tHeadElement);
 
     addCategories(i);
+
+    let totalList = document.querySelector("#totalList");
+    let totalElement = document.createElement("td");
+    totalElement.id = "Total " + nameList[i];
+    totalList.appendChild(totalElement);
   }
 }
 

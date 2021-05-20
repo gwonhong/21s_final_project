@@ -11,6 +11,7 @@ function countDice() {
   for (let dice of dv) {
     diceCounter[dice]++;
   }
+  console.log(diceCounter);
 }
 
 function eraser(eturn) {
@@ -29,7 +30,7 @@ function drawScore() {
   // Upper Categories
   for (let i = 0; i < 6; i++) {
     scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[whosTurn]);
-    if (!scoreSpace.className) scoreSpace.textContent = diceCounter[i + 1]; // class에 암것도 없으면 draw
+    if (!scoreSpace.className) scoreSpace.textContent = (i + 1) * diceCounter[i + 1]; // class에 암것도 없으면 draw
     else console.log('Oops this value is confirmed');
 
     choice = choice + (i + 1) * diceCounter[i + 1];
@@ -86,8 +87,9 @@ function StraightCheck() {
   let isStart = false;
   let straight = 0;
 
+  // 1 0 1 1 1 1
   for (let val of diceCounter.slice(1, 7)) {
-    if (isStart === true && val === 0) break;
+    if (isStart === true && val === 0) straight = 0;
     if (val > 0) {
       isStart = true;
       straight++;
@@ -95,6 +97,19 @@ function StraightCheck() {
   }
 
   return straight >= 4 ? straight >= 5 ? 30 : 15 : 0;
+}
+
+function updateTotal(turn) {
+  let totalElement = document.querySelector("#total"+turn);
+  let total = 0;
+
+  for(let tagName of tagList.concat(tagList2)) {
+    let element = document.querySelector("#" + tagName + turn);
+    if (element.className) total += parseFloat(element.textContent);
+  }
+
+  totalElement.textContent = total;
+  console.log(total);
 }
 
 
@@ -109,6 +124,7 @@ function appendListener() {
         if (!isTurn) return; // 턴이 아니면 눌러도 반응x
         if (turn != playerList[whosTurn]) return; //자신 턴 아니면 반응x
         blank.className = "confirm bg-info";
+        updateTotal(turn);
         isTurn = false;
         whosTurn = ++whosTurn % playerNum;
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
