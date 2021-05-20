@@ -112,6 +112,7 @@ function appendListener() {
         isTurn = false;
         whosTurn = ++whosTurn % playerNum;
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
+        init();
         eraser(turn);
       })
     }

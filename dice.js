@@ -16,6 +16,14 @@ function init() {
         var ch = 1 + Math.floor(Math.random() * 6);
         drawFace(ch, j);
     }
+    console.log("abc");
+    
+    dtx.disabled = false;
+    for(var k = 0; k<5; k++){
+      chk[k].disabled = false;
+    }
+
+    bn = 0;
 }
 
 function drawFace(n, i) {
@@ -58,7 +66,9 @@ function drawFace(n, i) {
             dv[i] = 6;
             break;
     }
-    
+    countDice();
+    drawScore();
+    isTurn = true;
 }
 
 function throwDices() {
@@ -80,14 +90,10 @@ function throwDices() {
     console.log("bn");
     if(bn>1){
         dtx = document.getElementById("dice_button")
-        dtx.setAttribute("disabled", "true");
+        dtx.setAttribute("disabled", "");
         for(var k = 0; k<5; k++){
-            chk[k].setAttribute("disabled", "true");
+            chk[k].setAttribute("disabled", "");
         }
         
     }
-    
-    countDice();
-    drawScore();
-    isTurn = true;
 }
