@@ -108,10 +108,16 @@ function appendListener() {
         if (blank.className) return; // 확정 되면 눌러도 반응X
         if (!isTurn) return; // 턴이 아니면 눌러도 반응x
         if (turn != playerList[whosTurn]) return; //자신 턴 아니면 반응x
-        blank.className = "confirm";
+        blank.className = "confirm bg-info";
         isTurn = false;
         whosTurn = ++whosTurn % playerNum;
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
+        if(bn>2){
+          dtx.disabled = false;
+        }
+        for(var k = 0; k<5; k++){
+          chk[k].checked = false;
+        }
         init();
         eraser(turn);
       })

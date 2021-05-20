@@ -12,28 +12,27 @@ var bn = 0;
 var dv = [];
 
 function init() {
-    for(var j = 0; j<5; j++){
-        var ch = 1 + Math.floor(Math.random() * 6);
-        drawFace(ch, j);
-    }
-    console.log("abc");
-    
-    dtx.disabled = false;
-    for(var k = 0; k<5; k++){
-      chk[k].disabled = false;
-    }
-
-    bn = 0;
-}
-
-function drawFace(n, i) {
     ctx[0] = document.getElementById("1d")
     ctx[1] = document.getElementById("2d")
     ctx[2] = document.getElementById("3d")
     ctx[3] = document.getElementById("4d")
     ctx[4] = document.getElementById("5d")
-    //console.log("adfasdf");
-    //console.log(ctx);
+    chk[0] = document.querySelector("#\\31 dc");
+    chk[1] = document.querySelector("#\\32 dc");
+    chk[2] = document.querySelector("#\\33 dc");
+    chk[3] = document.querySelector("#\\34 dc");
+    chk[4] = document.querySelector("#\\35 dc");
+    for(var ctn=0; ctn<5; ctn++){
+      ctx[ctn].setAttribute("class", "bi bi-dice-1-fill me-1");
+    }
+    for(var ck = 0; ck<5; ck++){
+      chk[ck].disabled = true;
+    }
+    bn = 0;
+}
+
+function drawFace(n, i) {
+    
 
     switch(n) {
         case 1:
@@ -66,20 +65,15 @@ function drawFace(n, i) {
             dv[i] = 6;
             break;
     }
-    countDice();
-    drawScore();
-    isTurn = true;
+    
 }
 
 function throwDices() {
 
     isTurn = false;
-    
-    chk[0] = document.querySelector("#\\31 dc");
-    chk[1] = document.querySelector("#\\32 dc");
-    chk[2] = document.querySelector("#\\33 dc");
-    chk[3] = document.querySelector("#\\34 dc");
-    chk[4] = document.querySelector("#\\35 dc");
+    for(var ck = 0; ck<5; ck++){
+      chk[ck].disabled = false;
+    }
     for(var j = 0; j<5; j++){
         if(!chk[j].checked){
             var ch = 1 + Math.floor(Math.random() * 6);
@@ -88,12 +82,14 @@ function throwDices() {
     }
     bn++;
     console.log("bn");
-    if(bn>1){
+    if(bn>2){
         dtx = document.getElementById("dice_button")
         dtx.setAttribute("disabled", "");
         for(var k = 0; k<5; k++){
             chk[k].setAttribute("disabled", "");
-        }
-        
+        }    
     }
+    countDice();
+    drawScore();
+    isTurn = true;
 }
