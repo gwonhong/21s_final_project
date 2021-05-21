@@ -1,13 +1,23 @@
+body {
+  font-family: 'Do Hyeon', sans-serif;
+  background-image: url("riho-kroll-m4sGYaHYN5o-unsplash_1080.jpg");
+  background-size: cover;
+}
+
 td {
   text-align: center;
   width: 85px;
 }
 
-.content { 
-  height: 3000px; 
-} /* 전체를 감싸고 있는 div에 fixed 부여 함으로 써 content의 길이가 길어져도 dimmed가 배경에 100% 깔릴 수 있게 함 */ 
+#board {
+  width: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-.layer_popup { 
+#popup { 
   position: fixed; 
   top: 0; 
   left: 0; 
@@ -23,4 +33,3 @@ td {
 .btn_area > .btn_twitter{ width: 25%; background-color: #00acee; } /* Dribbble 넓이 / 색상 */ 
 .btn_area > .btn_Dribbble{ width: 25%; background-color: #ff7b89; margin: 0; } /* 닫기 버튼 디자인 및 위치 조절*/ 
 .btn_close{ border: none; font-size: 15px; width: 80px; height: 25px; background: transparent; position: absolute; top: 10px; right: 10px; cursor: pointer; font-weight: bold; } /* 딤드 처리 */ 
-.dimmed{ background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: -1; }

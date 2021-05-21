@@ -1,7 +1,7 @@
 //popup input to playerNum
-let popup = document.querySelector("#pop");
+let popup = document.querySelector("#popup");
 let closeMenu = document.querySelector("#confirmBtn");
-let container = document.querySelector("#root");
+let board = document.querySelector("#board");
 let form = document.querySelector("#Input1");
 
 //popUp창 닫는 리스너
@@ -14,7 +14,7 @@ closeMenu.addEventListener("click", () => {
 
   //size 조절
   let size = 85 * (playerNum - 1) + 1000;
-  container.setAttribute("style", "width: " + size + "px");
+  board.setAttribute("style", "width: " + size + "px");
 })
 
 //apply playerNum to board
