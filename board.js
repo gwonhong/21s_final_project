@@ -186,17 +186,21 @@ function fullhouseCheck() {
 function StraightCheck() {
   let isStart = false;
   let straight = 0;
+  let maxLength = 0;
 
   // 1 0 1 1 1 1
+  // 1 1 1 1 1 0 <-- 주사위값 6 체크할때 straight값을 0으로 처리해버리는 문제
+  // 1 1 1 1 0 0
   for (let val of diceCounter.slice(1, 7)) {
     if (isStart === true && val === 0) straight = 0;
     if (val > 0) {
       isStart = true;
       straight++;
+      if(straight > maxLength) maxLength = straight;
     }
   }
 
-  return straight >= 4 ? straight >= 5 ? 30 : 15 : 0;
+  return maxLength >= 4 ? maxLength >= 5 ? 30 : 15 : 0;
 }
 
 function updateTotal(turn) {
