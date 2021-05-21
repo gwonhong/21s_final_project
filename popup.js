@@ -39,7 +39,7 @@ function addPlayer() {
 
     let totalList = document.querySelector("#totalList");
     let totalElement = document.createElement("td");
-    totalElement.id = "Total " + nameList[i];
+    totalElement.id = "total" + nameList[i];
     totalList.appendChild(totalElement);
   }
 }
