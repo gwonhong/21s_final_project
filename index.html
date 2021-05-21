@@ -33,7 +33,10 @@
     });
     var closeButton = document.querySelector('#close');
     closeButton.addEventListener('click', () => {
-      window.close(); //will not work with common browsers, but will work with electron
+      body.classList.add('fade-out');
+      setTimeout(() => {
+        window.close(); //will not work with common browsers, but will work with electron
+      }, 500);
     });
   </script>
 
