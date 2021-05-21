@@ -1,6 +1,7 @@
 let diceIcon = [];
 let diceHold = [];
 let rolled = 0;
+let dtx;
 let diceVal = [];
 
 diceIcon[0] = document.getElementById("1d")
@@ -16,7 +17,7 @@ diceHold[4] = document.querySelector("#\\35 dc");
 
 function init() {
   for (let i = 0; i < 5; i++) {
-    diceIcon[i].setAttribute("class", "bi bi-dice-1-fill me-1");
+    diceIcon[i].setAttribute("class", "bi bi-question-square");
   }
   for (let i = 0; i < 5; i++) {
     diceHold[i].disabled = true;
@@ -29,32 +30,32 @@ function drawFace(n, i) {
 
   switch (n) {
     case 1:
-      diceIcon[i].setAttribute("class", "bi bi-dice-1-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-1-fill");
       diceVal[i] = 1;
       break;
 
     case 2:
-      diceIcon[i].setAttribute("class", "bi bi-dice-2-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-2-fill");
       diceVal[i] = 2;
       break;
 
     case 3:
-      diceIcon[i].setAttribute("class", "bi bi-dice-3-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-3-fill");
       diceVal[i] = 3;
       break;
 
     case 4:
-      diceIcon[i].setAttribute("class", "bi bi-dice-4-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-4-fill");
       diceVal[i] = 4;
       break;
 
     case 5:
-      diceIcon[i].setAttribute("class", "bi bi-dice-5-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-5-fill");
       diceVal[i] = 5;
       break;
 
     case 6:
-      diceIcon[i].setAttribute("class", "bi bi-dice-6-fill me-1");
+      diceIcon[i].setAttribute("class", "bi bi-dice-6-fill");
       diceVal[i] = 6;
       break;
   }
@@ -75,7 +76,7 @@ function throwDices() {
   rolled++;
   console.log("bn");
   if (rolled > 2) {
-    let dtx = document.getElementById("roll_button")
+    dtx = document.getElementById("roll_button")
     dtx.setAttribute("disabled", "");
     for (let i = 0; i < 5; i++) {
       diceHold[i].setAttribute("disabled", "");
