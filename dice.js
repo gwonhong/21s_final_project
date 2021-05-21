@@ -83,7 +83,7 @@ function throwDices() {
     bn++;
     console.log("bn");
     if(bn>2){
-        dtx = document.getElementById("dice_button")
+        dtx = document.getElementById("roll_button")
         dtx.setAttribute("disabled", "");
         for(var k = 0; k<5; k++){
             chk[k].setAttribute("disabled", "");

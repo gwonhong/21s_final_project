@@ -12,7 +12,7 @@
   <title>Yacht Dice</title>
 </head>
 
-<body onload="document.body.style.opacity='1'">
+<body class="fade-in">
   <div id="wrapper">
     <h1>요트 다이스</h1>
     <div id=menu class="w-50 shadow p-3 mb-5 rounded d-grid gap-2">
@@ -24,6 +24,9 @@
   </div>
   <script language="javascript" type="text/javascript">
     var body = document.querySelector('body');
+    window.onload = function() {
+      body.style.opcaity=1;
+    }
     var startButton = document.querySelector('#start');
     startButton.addEventListener('click', () => {
       body.classList.add('fade-out');

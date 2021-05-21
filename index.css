@@ -3,10 +3,6 @@ body {
   background-image: url("riho-kroll-m4sGYaHYN5o-unsplash_1080.jpg");
   background-size: cover;
   height: 100%;
-
-  opacity: 0;
-  transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s; /* Safari */
 }
 
 h1 {
@@ -23,6 +19,61 @@ h1 {
   min-width: 200px;
   max-width: 400px;
   height: 300px;
+}
+
+/*fade in motion*/
+.fade-in {
+  animation: fadeIn ease 0.5s;
+  -webkit-animation: fadeIn ease 0.5s;
+  -moz-animation: fadeIn ease 0.5s;
+  -o-animation: fadeIn ease 0.5s;
+  -ms-animation: fadeIn ease 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
 }
 
 .fade-out {

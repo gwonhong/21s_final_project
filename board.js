@@ -7,6 +7,106 @@ let playerNum;
 let whosTurn = 0;
 let maxRole = 3;
 
+//popup창 관련
+let popup = document.querySelector("#popup");
+let one = document.querySelector("#one");
+let two = document.querySelector("#two");
+let three = document.querySelector("#three");
+let four = document.querySelector("#four");
+let board = document.querySelector("#board");
+
+one.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 1;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+two.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 2;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+three.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 3;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+four.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 4;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+//apply playerNum to board
+let tableHead = document.querySelector("#t-head");
+let tUbody = document.querySelector("#upper-body");
+let tLbody = document.querySelector("#lower-body");
+
+let nameList = ["B", "C", "D"];
+
+function addPlayer() {
+  for (let i = 0; i < (playerNum - 1); i++) {
+    playerList.push(nameList[i]);
+  }
+
+  for (let i = 0; i < (playerNum - 1); i++) {
+    let tHeadElement = document.createElement("th");
+    tHeadElement.setAttribute("scope", "col");
+    tHeadElement.textContent = "Player " + nameList[i];
+    tableHead.appendChild(tHeadElement);
+
+    addCategories(i);
+
+    let totalList = document.querySelector("#totalList");
+    let totalElement = document.createElement("td");
+    totalElement.id = "total" + nameList[i];
+    totalList.appendChild(totalElement);
+  }
+}
+
+function addCategories(i) {
+  for (let j = 0; j < 6; j++) {
+    let tUbodyRow = tUbody.children[j];
+    let tUbodyElement = document.createElement("td");
+    tUbodyElement.id = tagList[j] + nameList[i];
+    tUbodyRow.appendChild(tUbodyElement);
+
+
+    let tLbodyRow = tLbody.children[j];
+    let tLbodyElement = document.createElement("td");
+    tLbodyElement.id = tagList2[j] + nameList[i];
+    tLbodyRow.appendChild(tLbodyElement);
+  }
+}
+//popup창 끝
+
+
 function countDice() {
   for (let dice of dv) {
     diceCounter[dice]++;

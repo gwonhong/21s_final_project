@@ -35,8 +35,7 @@ td {
   margin: auto; border-radius: 5px; box-shadow: 0 0 10px -4px;
   padding: 30px;
   text-align: center;
-} /* 전체 글 부분 패딩값 조절 */ 
-
+}
 #popup_text{ font-size: 20px;}
 #popup_btn{ margin-top: 15px;}
 
