@@ -108,7 +108,7 @@ function addCategories(i) {
 
 
 function countDice() {
-  for (let dice of dv) {
+  for (let dice of diceVal) {
     diceCounter[dice]++;
   }
   console.log(diceCounter);
@@ -200,10 +200,10 @@ function StraightCheck() {
 }
 
 function updateTotal(turn) {
-  let totalElement = document.querySelector("#total"+turn);
+  let totalElement = document.querySelector("#total" + turn);
   let total = 0;
 
-  for(let tagName of tagList.concat(tagList2)) {
+  for (let tagName of tagList.concat(tagList2)) {
     let element = document.querySelector("#" + tagName + turn);
     if (element.className) total += parseFloat(element.textContent);
   }
@@ -228,11 +228,11 @@ function appendListener() {
         isTurn = false;
         whosTurn = ++whosTurn % playerNum;
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
-        if(bn>2){
+        if (rolled > 2) {
           dtx.disabled = false;
         }
-        for(var k = 0; k<5; k++){
-          chk[k].checked = false;
+        for (var k = 0; k < 5; k++) {
+          diceHold[k].checked = false;
         }
         init();
         eraser(turn);

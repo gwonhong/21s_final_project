@@ -14,68 +14,35 @@
 </head>
 
 <body>
-
-
   <div id="board">
     <div class="d-flex">
       <div class="flex-grow-1 bg-light me-1 da">
         <div class="d-flex p-2">
           <div class="flex-grow-1 bg-light me-1 da">
-            <table id="Dice" class="table table-bordered">
-              <thead class="table-darkx">
-                <tr>
-                  <th scope="col" class="table-dark"> - </th>
-                  <th scope="col">DICE 1</th>
-                  <th scope="col">DICE 2</th>
-                  <th scope="col">DICE 3</th>
-                  <th scope="col">DICE 4</th>
-                  <th scope="col">DICE 5</th>
-                </tr>
-              </thead>
-              <tbody id="dice-body">
-                <tr>
-                  <th scope="col">DICE</th>
-                  <th scope="row"><i id="1d" class="bi bi-dice-1-fill me-1"></i></th>
-                  <th scope="row"><i id="2d" class="bi bi-dice-2-fill me-1"></i></th>
-                  <th scope="row"><i id="3d" class="bi bi-dice-3-fill me-1"></i></th>
-                  <th scope="row"><i id="4d" class="bi bi-dice-4-fill me-1"></i></th>
-                  <th scope="row"><i id="5d" class="bi bi-dice-5-fill me-1"></i></th>
-                </tr>
-              </tbody>
-              <tbody id="check-body">
-                <tr>
-                  <th scope="col">HOLD</th>
-                  <th scope="row">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="1dc" navme="1dc">
-                      <label class="form-check-label" for="1dc"></label>
-                    </div>
-                  </th>
-                  <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="" id="2dc" navme="3dc">
-                    <label class="form-check-label" for="sdc">
-                    </label>
-                  </th>
-                  <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="" id="3dc" navme="3dc">
-                    <label class="form-check-label" for="3dc">
-                    </label>
-                  </th>
-                  <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="" id="4dc" navme="4dc">
-                    <label class="form-check-label" for="5dc">
-                    </label>
-                  </th>
-                  <th scope="row">
-                    <input class="form-check-input" type="checkbox" value="" id="5dc" navme="5dc">
-                    <label class="form-check-label" for="5dc">
-                    </label>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+            <ul>
+              <li>
+                <input type="checkbox" id="1dc" style="display: none;"/>
+                <label for="1dc"><i id="1d" style="font-size: 4rem;" class="bi bi-dice-1-fill me-1"></i></label>    
+              </li>
+              <li>
+                <input type="checkbox" id="2dc" style="display: none;"/>
+                <label for="2dc"><i id="2d" style="font-size: 4rem;" class="bi bi-dice-1-fill me-1"></i></label>    
+              </li>
+              <li>
+                <input type="checkbox" id="3dc" style="display: none;"/>
+                <label for="3dc"><i id="3d" style="font-size: 4rem;" class="bi bi-dice-1-fill me-1"></i></label>    
+              </li>
+              <li>
+                <input type="checkbox" id="4dc" style="display: none;"/>
+                <label for="4dc"><i id="4d" style="font-size: 4rem;" class="bi bi-dice-1-fill me-1"></i></label>    
+              </li>
+              <li>
+                <input type="checkbox" id="5dc" style="display: none;"/>
+                <label for="5dc"><i id="5d" style="font-size: 4rem;" class="bi bi-dice-1-fill me-1"></i></label>    
+              </li>
+            </ul>
 
-            <button id="roll_button" onclick="throwDices();" type="button" class="btn btn-primary btn-sm">Roll</button>
+            <button id="roll_button" onclick="throwDices();" type="button" class="btn btn-primary btn-lg">Let's Roll!</button>
 
             <script>
               window.onload = function () {
@@ -179,10 +146,6 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
-  <script src="popup.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-    crossorigin="anonymous"></script> -->
   <script src="dice.js"></script>
   <script src="board.js"></script>
 

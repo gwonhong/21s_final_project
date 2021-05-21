@@ -4,20 +4,7 @@ body {
   background-size: cover;
 }
 
-td {
-  text-align: center;
-  width: 85px;
-}
-
-#board {
-  width: 1000px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
+/*popup css*/
 #popup {
   position: fixed; 
   top: 0; 
@@ -38,6 +25,79 @@ td {
 }
 #popup_text{ font-size: 20px;}
 #popup_btn{ margin-top: 15px;}
+
+/*scoreboard css*/
+td {
+  text-align: center;
+  width: 85px;
+}
+
+#board {
+  width: 1000px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+/*dice css*/
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline-block;
+}
+
+input[type="checkbox"][id^="cb"] {
+  display: none;
+}
+
+label {
+  border: 1px rgba(0,0,0,0);
+  border-radius: 5%;
+  display: block;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* label::before {
+  background-color: blue;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid blue;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 29px;
+  transition-duration: 0.2s;
+  transform: scale(0);
+} */
+
+
+:checked+label {
+  background-color: skyblue;
+}
+
+/* :checked+label::before {
+  content: "V";
+  font-size: 15px;
+  background-color: blue;
+  transform: scale(1);
+} */
 
 /*fade in motion*/
 .fade-in {

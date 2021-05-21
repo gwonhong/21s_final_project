@@ -1,95 +1,87 @@
-var cwidth = 1000;
-var cheight = 1000;
-var dicex = 50;
-var dicey = 50;
-var diceWidth = 100;
-var diceHeight = 100;
-var dotrad = 6;
-var ctx = [];
-var chk = [];
-var dtx;
-var bn = 0;
-var dv = [];
+let diceIcon = [];
+let diceHold = [];
+let rolled = 0;
+let diceVal = [];
+
+diceIcon[0] = document.getElementById("1d")
+diceIcon[1] = document.getElementById("2d")
+diceIcon[2] = document.getElementById("3d")
+diceIcon[3] = document.getElementById("4d")
+diceIcon[4] = document.getElementById("5d")
+diceHold[0] = document.querySelector("#\\31 dc");
+diceHold[1] = document.querySelector("#\\32 dc");
+diceHold[2] = document.querySelector("#\\33 dc");
+diceHold[3] = document.querySelector("#\\34 dc");
+diceHold[4] = document.querySelector("#\\35 dc");
 
 function init() {
-    ctx[0] = document.getElementById("1d")
-    ctx[1] = document.getElementById("2d")
-    ctx[2] = document.getElementById("3d")
-    ctx[3] = document.getElementById("4d")
-    ctx[4] = document.getElementById("5d")
-    chk[0] = document.querySelector("#\\31 dc");
-    chk[1] = document.querySelector("#\\32 dc");
-    chk[2] = document.querySelector("#\\33 dc");
-    chk[3] = document.querySelector("#\\34 dc");
-    chk[4] = document.querySelector("#\\35 dc");
-    for(var ctn=0; ctn<5; ctn++){
-      ctx[ctn].setAttribute("class", "bi bi-dice-1-fill me-1");
-    }
-    for(var ck = 0; ck<5; ck++){
-      chk[ck].disabled = true;
-    }
-    bn = 0;
+  for (let i = 0; i < 5; i++) {
+    diceIcon[i].setAttribute("class", "bi bi-dice-1-fill me-1");
+  }
+  for (let i = 0; i < 5; i++) {
+    diceHold[i].disabled = true;
+  }
+  rolled = 0;
 }
 
 function drawFace(n, i) {
-    
 
-    switch(n) {
-        case 1:
-            ctx[i].setAttribute("class", "bi bi-dice-1-fill me-1");
-            dv[i] = 1;
-            break;
 
-        case 2:
-            ctx[i].setAttribute("class", "bi bi-dice-2-fill me-1");
-            dv[i] = 2;
-            break;
+  switch (n) {
+    case 1:
+      diceIcon[i].setAttribute("class", "bi bi-dice-1-fill me-1");
+      diceVal[i] = 1;
+      break;
 
-        case 3:
-            ctx[i].setAttribute("class", "bi bi-dice-3-fill me-1");
-            dv[i] = 3;
-            break;
+    case 2:
+      diceIcon[i].setAttribute("class", "bi bi-dice-2-fill me-1");
+      diceVal[i] = 2;
+      break;
 
-        case 4:
-            ctx[i].setAttribute("class", "bi bi-dice-4-fill me-1");
-            dv[i] = 4;
-            break;
+    case 3:
+      diceIcon[i].setAttribute("class", "bi bi-dice-3-fill me-1");
+      diceVal[i] = 3;
+      break;
 
-        case 5:
-            ctx[i].setAttribute("class", "bi bi-dice-5-fill me-1");
-            dv[i] = 5;
-            break;
+    case 4:
+      diceIcon[i].setAttribute("class", "bi bi-dice-4-fill me-1");
+      diceVal[i] = 4;
+      break;
 
-        case 6:
-            ctx[i].setAttribute("class", "bi bi-dice-6-fill me-1");
-            dv[i] = 6;
-            break;
-    }
-    
+    case 5:
+      diceIcon[i].setAttribute("class", "bi bi-dice-5-fill me-1");
+      diceVal[i] = 5;
+      break;
+
+    case 6:
+      diceIcon[i].setAttribute("class", "bi bi-dice-6-fill me-1");
+      diceVal[i] = 6;
+      break;
+  }
+
 }
 
 function throwDices() {
-
-    isTurn = false;
-    for(var ck = 0; ck<5; ck++){
-      chk[ck].disabled = false;
+  isTurn = false;
+  for (let i = 0; i < 5; i++) {
+    diceHold[i].disabled = false;
+  }
+  for (let i = 0; i < 5; i++) {
+    if (!diceHold[i].checked) {
+      let randomN = 1 + Math.floor(Math.random() * 6);
+      drawFace(randomN, i);
     }
-    for(var j = 0; j<5; j++){
-        if(!chk[j].checked){
-            var ch = 1 + Math.floor(Math.random() * 6);
-            drawFace(ch, j);
-        }
+  }
+  rolled++;
+  console.log("bn");
+  if (rolled > 2) {
+    let dtx = document.getElementById("roll_button")
+    dtx.setAttribute("disabled", "");
+    for (let i = 0; i < 5; i++) {
+      diceHold[i].setAttribute("disabled", "");
     }
-    bn++;
-    console.log("bn");
-    if(bn>2){
-        dtx = document.getElementById("roll_button")
-        dtx.setAttribute("disabled", "");
-        for(var k = 0; k<5; k++){
-            chk[k].setAttribute("disabled", "");
-        }    
-    }
-    countDice();
-    drawScore();
-    isTurn = true;
+  }
+  countDice();
+  drawScore();
+  isTurn = true;
 }
