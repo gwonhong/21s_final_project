@@ -1,20 +1,58 @@
 //popup input to playerNum
 let popup = document.querySelector("#popup");
-let closeMenu = document.querySelector("#confirmBtn");
+let one = document.querySelector("#one");
+let two = document.querySelector("#two");
+let three = document.querySelector("#three");
+let four = document.querySelector("#four");
 let board = document.querySelector("#board");
-let form = document.querySelector("#Input1");
+// let form = document.querySelector("#Input1");
 
-//popUp창 닫는 리스너
-closeMenu.addEventListener("click", () => {
+one.addEventListener("click", () => {
   popup.remove();
-  if (form.value === "") playerNum = 1;
-  else playerNum = form.value;
+  playerNum = 1;
   addPlayer();
   appendListener();
 
   //size 조절
   let size = 85 * (playerNum - 1) + 1000;
   board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+two.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 2;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+three.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 3;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
+})
+
+four.addEventListener("click", () => {
+  popup.remove();
+  playerNum = 4;
+  addPlayer();
+  appendListener();
+
+  //size 조절
+  let size = 85 * (playerNum - 1) + 1000;
+  board.setAttribute("style", "width: " + size + "px");
+  board.classList.add('fade-in');
 })
 
 //apply playerNum to board

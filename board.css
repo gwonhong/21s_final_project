@@ -15,9 +15,10 @@ td {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
 }
 
-#popup { 
+#popup {
   position: fixed; 
   top: 0; 
   left: 0; 
@@ -33,3 +34,59 @@ td {
 .btn_area > .btn_twitter{ width: 25%; background-color: #00acee; } /* Dribbble 넓이 / 색상 */ 
 .btn_area > .btn_Dribbble{ width: 25%; background-color: #ff7b89; margin: 0; } /* 닫기 버튼 디자인 및 위치 조절*/ 
 .btn_close{ border: none; font-size: 15px; width: 80px; height: 25px; background: transparent; position: absolute; top: 10px; right: 10px; cursor: pointer; font-weight: bold; } /* 딤드 처리 */ 
+
+
+/*fade in motion*/
+.fade-in {
+  animation: fadeIn ease 0.5s;
+  -webkit-animation: fadeIn ease 0.5s;
+  -moz-animation: fadeIn ease 0.5s;
+  -o-animation: fadeIn ease 0.5s;
+  -ms-animation: fadeIn ease 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}

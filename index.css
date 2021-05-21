@@ -25,14 +25,15 @@ h1 {
   height: 300px;
 }
 
-
 .fade-out {
   animation: fadeOut ease 0.5s;
   -webkit-animation: fadeOut ease 0.5s;
   -moz-animation: fadeOut ease 0.5s;
   -o-animation: fadeOut ease 0.5s;
   -ms-animation: fadeOut ease 0.5s;
+  animation-fill-mode: forwards;
 }
+
 @keyframes fadeOut {
   0% {
     opacity:1;
