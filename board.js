@@ -197,7 +197,7 @@ function StraightCheck() {
     if (val > 0) {
       isStart = true;
       straight++;
-      if(straight > maxLength) maxLength = straight;
+      if (straight > maxLength) maxLength = straight;
     }
   }
 
@@ -234,7 +234,7 @@ function appendListener() {
         whosTurn = ++whosTurn % playerNum;
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
         if (rolled > 2) {
-          dtx.disabled = false;
+          rollButton.disabled = false;
         }
         for (var k = 0; k < 5; k++) {
           diceHold[k].checked = false;

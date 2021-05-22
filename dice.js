@@ -1,8 +1,9 @@
 let diceIcon = [];
 let diceHold = [];
 let rolled = 0;
-let dtx;
 let diceVal = [];
+let rollButton = document.getElementById("rollButton");
+let chanceText= document.getElementById("chanceText");
 
 diceIcon[0] = document.getElementById("1d")
 diceIcon[1] = document.getElementById("2d")
@@ -22,6 +23,7 @@ function init() {
   for (let i = 0; i < 5; i++) {
     diceHold[i].disabled = true;
   }
+  chanceText.textContent="총 3번 굴릴 수 있습니다!";
   rolled = 0;
 }
 
@@ -69,18 +71,24 @@ function throwDices() {
   }
   for (let i = 0; i < 5; i++) {
     if (!diceHold[i].checked) {
-      let randomN = 1 + Math.floor(Math.random() * 6);
-      drawFace(randomN, i);
+      let randomNum = 1 + Math.floor(Math.random() * 6);
+      drawFace(randomNum, i);
     }
   }
   rolled++;
   console.log("bn");
+  if(rolled===1){
+    chanceText.textContent="2번 남았습니다!";
+  }
+  else if(rolled===2){
+    chanceText.textContent="1번 남았습니다!";
+  }
   if (rolled > 2) {
-    dtx = document.getElementById("roll_button")
-    dtx.setAttribute("disabled", "");
+    rollButton.disabled = true;
     for (let i = 0; i < 5; i++) {
       diceHold[i].setAttribute("disabled", "");
     }
+    chanceText.textContent="점수판에 클릭해서 기록해주세요!";
   }
   countDice();
   drawScore();

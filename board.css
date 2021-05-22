@@ -11,16 +11,13 @@ body {
   opacity: 0;
 }
 #diceboard {
-  width: 600px;
+  width: max-content;
 }
 
 /*popup css*/
 #popup {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
 } /* absolute / margin 을 통한 화면 정중앙 정렬 및 디자인*/ 
 
 .layer{ 
@@ -42,17 +39,19 @@ td {
   width: 85px;
 }
 
-
 /*dice css*/
 ul {
   padding-left: 0px;
   list-style: none;
   overflow: auto;
-
 } 
 ul li {
   float: left;
   margin-right: 5px;
+  align-items: center;
+}
+ul li i {
+  font-size: 5rem;
 }
 
 /* input[type="checkbox"][id^="cb"] {

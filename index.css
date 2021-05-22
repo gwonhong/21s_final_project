@@ -9,13 +9,12 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -200px;
-  margin-left: -100px;
+  margin-top: -225px;
+  margin-left: -175px;
 }
 
 h1 {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 100px;
   text-align: center;
   font-size: 50px;
   text-shadow: 4px 4px 3px gray;
@@ -25,7 +24,7 @@ h1 {
   margin: auto;
   background-color: rgba(255,255,255,0.9);
   border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
-  min-width: 200px;
+  min-width: 350px;
   max-width: 400px;
   height: 300px;
 }

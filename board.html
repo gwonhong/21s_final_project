@@ -17,33 +17,34 @@
   <div id="board">
     <div class="d-flex">
       <div id="diceboard" class="flex-grow-1" style="padding: 10px;">
-        <h2>주사위를 클릭하여 고정하세요!</h2>
+        <span style="font-size:xx-large;margin-left:16px;">주사위를 클릭하여 고정하세요!</span>
         <ul>
           <li>
             <input type="checkbox" id="1dc" style="display: none;" />
-            <label for="1dc"><i id="1d" class="bi bi-question-square" style="font-size: 4rem;"></i></label>
+            <label for="1dc"><i id="1d" class="bi bi-question-square"></i></label>
           </li>
           <li>
             <input type="checkbox" id="2dc" style="display: none;" />
-            <label for="2dc"><i id="2d" class="bi bi-question-square" style="font-size: 4rem;"></i></label>
+            <label for="2dc"><i id="2d" class="bi bi-question-square"></i></label>
           </li>
           <li>
             <input type="checkbox" id="3dc" style="display: none;" />
-            <label for="3dc"><i id="3d" class="bi bi-question-square" style="font-size: 4rem;"></i></label>
+            <label for="3dc"><i id="3d" class="bi bi-question-square"></i></label>
           </li>
           <li>
             <input type="checkbox" id="4dc" style="display: none;" />
-            <label for="4dc"><i id="4d" class="bi bi-question-square" style="font-size: 4rem;"></i></label>
+            <label for="4dc"><i id="4d" class="bi bi-question-square"></i></label>
           </li>
           <li>
             <input type="checkbox" id="5dc" style="display: none;" />
-            <label for="5dc"><i id="5d" class="bi bi-question-square" style="font-size: 4rem;"></i></label>
-          </li>
-          <li>
-            <button id="roll_button" onclick="throwDices();" type="button" class="btn btn-primary btn-lg"
-            style="white-space: normal;width: 80px;">Let's Roll!</button>
+            <label for="5dc"><i id="5d" class="bi bi-question-square"></i></label>
           </li>
         </ul>
+        <div class="d-flex">
+          <span id="chanceText" class="me-auto" style="font-size:xx-large;margin-left:16px;margin-top:-15px;">남은 기회</span>
+          <button id="rollButton" onclick="throwDices();" type="button" class="btn btn-primary btn-lg me-1" style="height:45px;margin-top:-15px;">Let's Roll!</button>
+          <span style="margin:8px;"></span>
+        </div>
 
 
         <script>
