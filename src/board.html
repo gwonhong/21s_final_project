@@ -41,8 +41,10 @@
           </li>
         </ul>
         <div class="d-flex">
-          <span id="chanceText" class="me-auto" style="font-size:xx-large;margin-left:16px;margin-top:-15px;">남은 기회</span>
-          <button id="rollButton" onclick="throwDices();" type="button" class="btn btn-primary btn-lg me-1" style="height:45px;margin-top:-15px;">Let's Roll!</button>
+          <span id="chanceText" class="me-auto" style="font-size:xx-large;margin-left:16px;margin-top:-15px;">남은
+            기회</span>
+          <button id="rollButton" onclick="throwDices();" type="button" class="btn btn-primary btn-lg me-1"
+            style="height:45px;margin-top:-15px;">Let's Roll!</button>
           <span style="margin:8px;"></span>
         </div>
 
@@ -133,21 +135,32 @@
     </div>
   </div>
 
+  <div id="endPopup" class="layer popupClose">
+    <div style="font-size: 30px;">축하합니다!</div>
+    <div id="endMsg" style="font-size: 30px;">the winner</div>
+    <button id="endButton" type="button" class="btn btn-outline-primary btn-lg">메인 메뉴로 돌아가기</button>
+    <script>
+      document.querySelector("#endButton").addEventListener('click', () => {
+        document.querySelector('body').classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 500);
+      });
+    </script>
+  </div>
 
-  <div id="popup" class="fade-in">
-    <div class="layer">
-      <div id="popup_text">Choose number of Yacht Players!</div>
-      <div id="popup_btn" class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-        <button id="one" type="button" class="btn btn-outline-primary">1</button>
-        <button id="two" type="button" class="btn btn-outline-primary">2</button>
-        <button id="three" type="button" class="btn btn-outline-primary">3</button>
-        <button id="four" type="button" class="btn btn-outline-primary">4</button>
-      </div>
+  <div id="popup" class="layer fade-in">
+    <div style="font-size: 30px;">플레이어 수를 골라주세요!</div>
+    <div id="popup_btn" class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+      <button id="one" type="button" class="btn btn-outline-primary">1</button>
+      <button id="two" type="button" class="btn btn-outline-primary">2</button>
+      <button id="three" type="button" class="btn btn-outline-primary">3</button>
+      <button id="four" type="button" class="btn btn-outline-primary">4</button>
     </div>
   </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script> -->
   <script src="dice.js"></script>
   <script src="board.js"></script>
 

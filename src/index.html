@@ -23,18 +23,15 @@
     </div>
   </div>
   <script language="javascript" type="text/javascript">
-    var body = document.querySelector('body');
-    window.onload = function() {
-      body.style.opcaity=1;
-    }
-    var startButton = document.querySelector('#start');
+    let body = document.querySelector('body');
+    let startButton = document.querySelector('#start');
     startButton.addEventListener('click', () => {
       body.classList.add('fade-out');
       setTimeout(() => {
         window.location.href = 'board.html';
       }, 500);
     });
-    var closeButton = document.querySelector('#close');
+    let closeButton = document.querySelector('#close');
     closeButton.addEventListener('click', () => {
       body.classList.add('fade-out');
       setTimeout(() => {

@@ -1,11 +1,11 @@
-let diceList = [];
+let totalTurns = 0;
+let finalTurn;
 let diceCounter = [0, 0, 0, 0, 0, 0, 0];
 let tagList = ["AcesVal", "DucesVal", "TreesVal", "FoursVal", "FivesVal", "SixesVal"];
 let tagList2 = ["ChoiceVal", "fourofaKindVal", "FullhouseVal", "v15", "v30", "Yacht"];
 let playerList = ["A"];
 let playerNum;
 let whosTurn = 0;
-let maxRole = 3;
 
 //popup창 관련
 let popup = document.querySelector("#popup");
@@ -17,10 +17,11 @@ let board = document.querySelector("#board");
 let scoreboard = document.querySelector('#scoreboard');
 
 one.addEventListener("click", () => {
-  popup.remove();
+  popup.classList.add("popupClose");
   playerNum = 1;
   addPlayer();
   appendListener();
+  finalTurn = playerNum * 12;
 
   //size 조절
   let size = 85 * (playerNum - 1) + 250;
@@ -29,10 +30,11 @@ one.addEventListener("click", () => {
 })
 
 two.addEventListener("click", () => {
-  popup.remove();
+  popup.classList.add("popupClose");
   playerNum = 2;
   addPlayer();
   appendListener();
+  finalTurn = playerNum * 12;
 
   //size 조절
   let size = 85 * (playerNum - 1) + 250;
@@ -41,10 +43,11 @@ two.addEventListener("click", () => {
 })
 
 three.addEventListener("click", () => {
-  popup.remove();
+  popup.classList.add("popupClose");
   playerNum = 3;
   addPlayer();
   appendListener();
+  finalTurn = playerNum * 12;
 
   //size 조절
   let size = 85 * (playerNum - 1) + 250;
@@ -53,10 +56,11 @@ three.addEventListener("click", () => {
 })
 
 four.addEventListener("click", () => {
-  popup.remove();
+  popup.classList.add("popupClose");
   playerNum = 4;
   addPlayer();
   appendListener();
+  finalTurn = playerNum * 12;
 
   //size 조절
   let size = 85 * (playerNum - 1) + 250;
@@ -111,10 +115,8 @@ function addCategories(i) {
 
 
 function countDice() {
-  for (let dice of diceVal) {
+  for (let dice of diceVal)
     diceCounter[dice]++;
-  }
-  console.log(diceCounter);
 }
 
 function eraser(eturn) {
@@ -231,7 +233,6 @@ function updateTotal(turn) {
   }
 
   totalElement.textContent = total;
-  console.log(total);
 }
 
 
@@ -251,12 +252,29 @@ function appendListener() {
         document.querySelector("#player" + playerList[whosTurn]).classList.remove("bg-primary");//현재턴 사람 지우기
         whosTurn = ++whosTurn % playerNum;
         document.querySelector("#player" + playerList[whosTurn]).classList.add("bg-primary");//자기턴인지 표시
-        console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
+        // console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
         if (rolled > 2) {
           rollButton.disabled = false;
         }
         for (var k = 0; k < 5; k++) {
           diceHold[k].checked = false;
+        }
+        if (++totalTurns === finalTurn) {
+          let winnerScore = 0;
+          let winner;
+          for (let i = 0; i < playerNum; i++) {
+            let temp = parseInt(document.querySelector("#total" + playerList[i]).textContent);
+            console.log("temp=" + temp);
+            if (temp > winnerScore) {
+              winnerScore = temp;
+              winner = i;
+            }
+          }
+          console.log("winner=" + winner);
+          document.querySelector("#endMsg").textContent = "플레이어 ".concat(playerList[winner]) + "가 우승했습니다!";
+          let endPopup = document.querySelector("#endPopup")
+          endPopup.classList.remove("popupClose");
+          endPopup.classList.add("fade-in");
         }
         init();
         resetActive();
