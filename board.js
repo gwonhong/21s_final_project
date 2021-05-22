@@ -14,6 +14,7 @@ let two = document.querySelector("#two");
 let three = document.querySelector("#three");
 let four = document.querySelector("#four");
 let board = document.querySelector("#board");
+let scoreboard = document.querySelector('#scoreboard');
 
 one.addEventListener("click", () => {
   popup.remove();
@@ -22,8 +23,8 @@ one.addEventListener("click", () => {
   appendListener();
 
   //size 조절
-  let size = 85 * (playerNum - 1) + 1000;
-  board.setAttribute("style", "width: " + size + "px");
+  let size = 85 * (playerNum - 1) + 250;
+  scoreboard.setAttribute("style", "width: " + size + "px");
   board.classList.add('fade-in');
 })
 
@@ -34,8 +35,8 @@ two.addEventListener("click", () => {
   appendListener();
 
   //size 조절
-  let size = 85 * (playerNum - 1) + 1000;
-  board.setAttribute("style", "width: " + size + "px");
+  let size = 85 * (playerNum - 1) + 250;
+  scoreboard.setAttribute("style", "width: " + size + "px");
   board.classList.add('fade-in');
 })
 
@@ -46,8 +47,8 @@ three.addEventListener("click", () => {
   appendListener();
 
   //size 조절
-  let size = 85 * (playerNum - 1) + 1000;
-  board.setAttribute("style", "width: " + size + "px");
+  let size = 85 * (playerNum - 1) + 250;
+  scoreboard.setAttribute("style", "width: " + size + "px");
   board.classList.add('fade-in');
 })
 
@@ -58,8 +59,8 @@ four.addEventListener("click", () => {
   appendListener();
 
   //size 조절
-  let size = 85 * (playerNum - 1) + 1000;
-  board.setAttribute("style", "width: " + size + "px");
+  let size = 85 * (playerNum - 1) + 250;
+  scoreboard.setAttribute("style", "width: " + size + "px");
   board.classList.add('fade-in');
 })
 

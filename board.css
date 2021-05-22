@@ -4,6 +4,16 @@ body {
   background-size: cover;
 }
 
+#board {
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  opacity: 0;
+}
+#diceboard {
+  width: 600px;
+}
+
 /*popup css*/
 #popup {
   position: fixed; 
@@ -14,16 +24,16 @@ body {
 } /* absolute / margin 을 통한 화면 정중앙 정렬 및 디자인*/ 
 
 .layer{ 
-  width: 350px; 
-  height: 150px; 
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
+  width: 550px; 
+  height: 180px; 
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
   position: absolute; top: 0; left: 0; bottom: 0; right: 0; 
-  margin: auto; border-radius: 5px; box-shadow: 0 0 10px -4px;
+  margin: auto;
   padding: 30px;
   text-align: center;
 }
-#popup_text{ font-size: 20px;}
+#popup_text{ font-size: 30px;}
 #popup_btn{ margin-top: 15px;}
 
 /*scoreboard css*/
@@ -32,33 +42,30 @@ td {
   width: 85px;
 }
 
-#board {
-  width: 1000px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  opacity: 0;
-}
 
 /*dice css*/
 ul {
-  list-style-type: none;
+  padding-left: 0px;
+  list-style: none;
+  overflow: auto;
+
+} 
+ul li {
+  float: left;
+  margin-right: 5px;
 }
 
-li {
-  display: inline-block;
-}
-
-input[type="checkbox"][id^="cb"] {
+/* input[type="checkbox"][id^="cb"] {
   display: none;
-}
+} */
 
 label {
   border: 1px rgba(0,0,0,0);
   border-radius: 5%;
   display: block;
+  padding-left:15px;
+  padding-right:15px;
   position: relative;
-  padding: 5px;
   cursor: pointer;
   transition-duration: 0.2s;
   -webkit-touch-callout: none;
