@@ -23,7 +23,7 @@ body {
 } /* absolute / margin 을 통한 화면 정중앙 정렬 및 디자인*/ 
 
 #endPopup {
-  width: 500px; 
+  width: 550px; 
   height: 250px; 
   opacity: 0;
   position: fixed;

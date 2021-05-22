@@ -2,31 +2,79 @@ body {
   font-family: 'Do Hyeon', sans-serif;
   background-image: url("riho-kroll-m4sGYaHYN5o-unsplash_1080.jpg");
   background-size: cover;
-  height: 100%;
-}
-
-#wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -225px;
-  margin-left: -175px;
 }
 
 h1 {
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   text-align: center;
-  font-size: 50px;
+  font-size: 70px;
   text-shadow: 4px 4px 3px gray;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 #menu {
   margin: auto;
   background-color: rgba(255,255,255,0.9);
   border: 1px solid #e5e5e5; border-radius: 5px; box-shadow: 0 0 10px -4px;
-  min-width: 350px;
-  max-width: 400px;
-  height: 300px;
+  min-width: 200px;
+  max-width: 500px;
+}
+.btn {
+  font-size: 30px;
+  padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/*start button funnier*/
+.bg-animate-color {
+  animation: random-bg .5s linear infinite;
+}
+/* add animation to bg color  */
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+.fun-btn {
+  background-color: lightskyblue;
+  color: white;
+  border: none;
+  transition: all .3s ease;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.fun-btn:hover {
+  animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
 }
 
 /*fade in motion*/
@@ -135,49 +183,5 @@ h1 {
   }
   100% {
     opacity:0;
-  }
-}
-
-/*start button funnier*/
-.bg-animate-color {
-  animation: random-bg .5s linear infinite;
-}
-/* add animation to bg color  */
-@keyframes random-bg {
-  from {
-    filter: hue-rotate(0);
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
-}
-.fun-btn {
-  background-color: lightskyblue;
-  color: white;
-  border: none;
-  transition: all .3s ease;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-}
-.fun-btn:hover {
-  animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
-}
-/* pulsating effect on button */
-@keyframes grow {
-  0% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.3);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1);
   }
 }

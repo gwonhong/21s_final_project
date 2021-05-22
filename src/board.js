@@ -235,6 +235,27 @@ function updateTotal(turn) {
   totalElement.textContent = total;
 }
 
+function endGame() {
+  let finalScores = [];//최종 점수들 기록
+  for (let i = 0; i < playerNum; i++)
+    finalScores.push(parseInt(document.querySelector("#total" + playerList[i]).textContent));
+  let winnerScore = Math.max.apply(null, finalScores);//최고점 찾기
+
+  let winners = [];//최고점이랑 같은 점수 가진 사람들(동점자 발생 대비)
+  let fromIndex = finalScores.indexOf(winnerScore);
+  while (fromIndex != -1) {
+    console.log(fromIndex);
+    winners.push(playerList[fromIndex]);
+    fromIndex = finalScores.indexOf(winnerScore, fromIndex + 1);
+  }
+  console.log("winnerScore: "+winnerScore+" winners: "+winners);
+
+  document.querySelector("#winnerMsg").textContent = "플레이어 " + winners.join(', ') + "가 우승했습니다!";
+  document.querySelector("#winnerScore").textContent = "최고점: " + winnerScore + "점";
+  let endPopup = document.querySelector("#endPopup")
+  endPopup.classList.remove("popupClose");
+  endPopup.classList.add("fade-in");
+}
 
 //listener
 let isTurn = false;
@@ -259,23 +280,7 @@ function appendListener() {
         for (var k = 0; k < 5; k++) {
           diceHold[k].checked = false;
         }
-        if (++totalTurns === finalTurn) {
-          let winnerScore = 0;
-          let winner;
-          for (let i = 0; i < playerNum; i++) {
-            let temp = parseInt(document.querySelector("#total" + playerList[i]).textContent);
-            console.log("temp=" + temp);
-            if (temp > winnerScore) {
-              winnerScore = temp;
-              winner = i;
-            }
-          }
-          console.log("winner=" + winner);
-          document.querySelector("#endMsg").textContent = "플레이어 ".concat(playerList[winner]) + "가 우승했습니다!";
-          let endPopup = document.querySelector("#endPopup")
-          endPopup.classList.remove("popupClose");
-          endPopup.classList.add("fade-in");
-        }
+        if (++totalTurns === finalTurn) endGame();
         init();
         resetActive();
         eraser(turn);
