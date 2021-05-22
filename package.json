@@ -4,7 +4,29 @@
   "description": "Yacht Dice game",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder build"
+  },
+  "build": {
+    "productName": "YachtDice",
+    "appId": "com.electron.yachtdice",
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "./src/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "repository": {
     "type": "git",
@@ -21,6 +43,7 @@
   },
   "homepage": "https://github.com/gwonhong/21s_final_project#readme",
   "devDependencies": {
-    "electron": "^12.0.9"
+    "electron": "^12.0.9",
+    "electron-builder": "^22.10.5"
   }
 }
