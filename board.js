@@ -79,6 +79,7 @@ function addPlayer() {
   for (let i = 0; i < (playerNum - 1); i++) {
     let tHeadElement = document.createElement("th");
     tHeadElement.setAttribute("scope", "col");
+    tHeadElement.id = "player" + nameList[i];
     tHeadElement.textContent = "Player " + nameList[i];
     tableHead.appendChild(tHeadElement);
 
@@ -87,6 +88,7 @@ function addPlayer() {
     let totalList = document.querySelector("#totalList");
     let totalElement = document.createElement("td");
     totalElement.id = "total" + nameList[i];
+    totalElement.classList.add("confirm");
     totalList.appendChild(totalElement);
   }
 }
@@ -118,7 +120,16 @@ function countDice() {
 function eraser(eturn) {
   for (let tagName of tagList.concat(tagList2)) {
     let blank2 = document.querySelector("#" + tagName + eturn);
-    if (!blank2.className) blank2.textContent = "";
+    if (blank2.classList.contains("confirm") === false) blank2.textContent = "";
+  }
+}
+
+function resetActive() { //마우스오버시 효과주는 active class를 주사위 굴릴때마다 전부 제거, draw할때 다시 추가
+  for (let tagName of tagList.concat(tagList2)) {
+    for (let turn of playerList) {
+      let blank = document.querySelector("#" + tagName + turn);
+      blank.classList.remove("active");
+    }
   }
 }
 
@@ -131,8 +142,8 @@ function drawScore() {
   // Upper Categories
   for (let i = 0; i < 6; i++) {
     scoreSpace = tbody.children[i].querySelector("#" + tagList[i] + playerList[whosTurn]);
-    if (!scoreSpace.className) scoreSpace.textContent = (i + 1) * diceCounter[i + 1]; // class에 암것도 없으면 draw
-    else console.log('Oops this value is confirmed');
+    scoreSpace.classList.add("active");
+    if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = (i + 1) * diceCounter[i + 1]; //confirm 아닌 경우에만 표시
 
     choice = choice + (i + 1) * diceCounter[i + 1];
   }
@@ -140,13 +151,16 @@ function drawScore() {
   //Lower Categories
   let player = playerList[whosTurn];
   scoreSpace = document.querySelector("#ChoiceVal" + player);
-  if (!scoreSpace.className) scoreSpace.textContent = choice;
+  scoreSpace.classList.add("active");
+  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = choice;
 
   scoreSpace = document.querySelector("#fourofaKindVal" + player);
-  scoreSpace.textContent = !scoreSpace.className && diceCounter.some(val => { val >= 4; }) ? choice : 0;
+  scoreSpace.classList.add("active");
+  scoreSpace.textContent = (!(scoreSpace.classList.contains("confirm"))) && diceCounter.some(val => { val >= 4; }) ? choice : 0;
 
   scoreSpace = document.querySelector("#FullhouseVal" + player);
-  if (!scoreSpace.className) scoreSpace.textContent = fullhouseCheck();
+  scoreSpace.classList.add("active");
+  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = fullhouseCheck();
 
   straight = StraightCheck();
   if (straight === 30) {
@@ -157,11 +171,14 @@ function drawScore() {
     v15 = 0; v30 = 0;
   }
   scoreSpace = document.querySelector("#v" + 30 + player);
-  if (!scoreSpace.className) scoreSpace.textContent = v30;
+  scoreSpace.classList.add("active");
+  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = v30;
   scoreSpace = document.querySelector("#v" + 15 + player);
-  if (!scoreSpace.className) scoreSpace.textContent = v15;
+  scoreSpace.classList.add("active");
+  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = v15;
 
   scoreSpace = document.querySelector("#Yacht" + player);
+  scoreSpace.classList.add("active");
   scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
 
   diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
@@ -210,7 +227,7 @@ function updateTotal(turn) {
 
   for (let tagName of tagList.concat(tagList2)) {
     let element = document.querySelector("#" + tagName + turn);
-    if (element.className) total += parseFloat(element.textContent);
+    if (element.classList.contains("confirm")) total += parseFloat(element.textContent);
   }
 
   totalElement.textContent = total;
@@ -225,13 +242,15 @@ function appendListener() {
     for (let turn of playerList) {
       let blank = document.querySelector("#" + tagName + turn);
       blank.addEventListener("click", () => {
-        if (blank.className) return; // 확정 되면 눌러도 반응X
+        if (blank.classList.contains("confirm")) return; // 확정 되면 눌러도 반응X
         if (!isTurn) return; // 턴이 아니면 눌러도 반응x
         if (turn != playerList[whosTurn]) return; //자신 턴 아니면 반응x
         blank.className = "confirm bg-info";
         updateTotal(turn);
         isTurn = false;
+        document.querySelector("#player" + playerList[whosTurn]).classList.remove("bg-primary");//현재턴 사람 지우기
         whosTurn = ++whosTurn % playerNum;
+        document.querySelector("#player" + playerList[whosTurn]).classList.add("bg-primary");//자기턴인지 표시
         console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
         if (rolled > 2) {
           rollButton.disabled = false;

@@ -35,8 +35,16 @@ body {
 
 /*scoreboard css*/
 td {
+  color: grey;
   text-align: center;
   width: 85px;
+}
+td.active:hover{
+  background-color: skyblue;
+}
+
+.confirm{
+  color: black;
 }
 
 /*dice css*/
