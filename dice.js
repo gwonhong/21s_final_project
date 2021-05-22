@@ -91,7 +91,6 @@ function throwDices() {
     chanceText.textContent="점수판에 클릭해서 기록해주세요!";
   }
   countDice();
-  resetActive();
   drawScore();
   isTurn = true;
 }

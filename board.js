@@ -259,6 +259,7 @@ function appendListener() {
           diceHold[k].checked = false;
         }
         init();
+        resetActive();
         eraser(turn);
       })
     }
