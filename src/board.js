@@ -235,6 +235,22 @@ function updateTotal(turn) {
   totalElement.textContent = total;
 }
 
+function saveRecords(record) {
+  let lastRecords = localStorage.getItem("records");
+  let records = [];
+  if (lastRecords) { //don't parse if lastRecords is empty
+    records = JSON.parse(lastRecords);
+  }
+  records.push(record);
+  records = records.sort((a, b) => {
+    return b.score - a.score;
+  });
+  for (let i = records.length; i >= 10; i--) { //delete except top 10
+    records[i].pop;
+  }
+  localStorage.setItem("records", JSON.stringify(records));
+}
+
 function endGame() {
   let finalScores = [];//최종 점수들 기록
   for (let i = 0; i < playerNum; i++)
@@ -248,7 +264,16 @@ function endGame() {
     winners.push(playerList[fromIndex]);
     fromIndex = finalScores.indexOf(winnerScore, fromIndex + 1);
   }
-  console.log("winnerScore: "+winnerScore+" winners: "+winners);
+
+  let now = new Date();
+  let time = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes();
+  let record = {
+    time: time,
+    score: winnerScore
+  };
+  saveRecords(record);
+
+  console.log("winnerScore: " + winnerScore + " winners: " + winners);
 
   document.querySelector("#winnerMsg").textContent = "플레이어 " + winners.join(', ') + "가 우승했습니다!";
   document.querySelector("#winnerScore").textContent = "최고점: " + winnerScore + "점";

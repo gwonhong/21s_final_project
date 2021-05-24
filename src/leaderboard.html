@@ -7,9 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="leaderboard.css">
 </head>
+
 <body class="fade-in">
   <div class="container">
     <button id="backtomain" type="button" class="btn btn-primary btn">메인메뉴로 돌아가기</button>
+    <script>
+      let backtomainButton = document.querySelector('#backtomain');
+      backtomainButton.addEventListener('click', () => {
+        document.querySelector('body').classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 500);
+      });
+    </script>
     <h1>기록</h1>
     <div id=menu class="w-50 shadow p-3 mb-5 rounded d-grid gap-2">
       <table class="table table-hover">
@@ -21,13 +31,53 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>date</td>
-            <td>score</td>
-          </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <script>
+    let records = [];
+
+    function addToTable(rank, record) {
+      let tr = document.createElement("tr");
+
+      let th = document.createElement("th");
+      th.setAttribute("scope", "row");
+      th.textContent = rank;
+      tr.appendChild(th);
+
+      let td1 = document.createElement("td");
+      td1.textContent = record.time;
+      tr.appendChild(td1);
+
+      let td2 = document.createElement("td");
+      td2.textContent = record.score;
+      tr.appendChild(td2);
+
+      let tbody = document.querySelector("tbody");
+      tbody.appendChild(tr);
+    }
+
+    function loadRecords() {
+      let lastRecords = localStorage.getItem("records");
+      if (!lastRecords) return;
+      records = JSON.parse(lastRecords);
+      for (let i = 1; i <= 10; i++) {
+        if (i <= records.length) {
+          addToTable(i, records[i - 1]);
+        }
+        else {//10개를 채워 이뻐보이기 위함
+          let emptyrecord = {
+            time: "",
+            score: ""
+          }
+          addToTable(i, emptyrecord);
+        }
+      }
+    }
+
+    window.addEventListener("load", () => {
+      loadRecords();
+    })
+  </script>
 </body>
