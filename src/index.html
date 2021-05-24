@@ -17,12 +17,12 @@
     <h1>요트 다이스</h1>
     <div id=menu class="w-50 shadow p-3 mb-5 rounded d-grid gap-2">
       <button id="start" type="button" class="btn fun-btn btn-lg" style="margin-top: 10px;">게임시작</button>
-      <button type="button" class="btn btn-warning btn-lg">기록</button>
+      <button id="record" type="button" class="btn btn-warning btn-lg">기록</button>
       <button type="button" class="btn btn-secondary btn-lg">설정</button>
       <button id="close" type="button" class="btn btn-danger btn-lg" style="margin-bottom: 10px;">게임종료</button>
     </div>
   </div>
-  <script language="javascript" type="text/javascript">
+  <script language="javascript" type="text/javascript" >
     let body = document.querySelector('body');
     let startButton = document.querySelector('#start');
     startButton.addEventListener('click', () => {
@@ -37,6 +37,15 @@
       setTimeout(() => {
         window.close(); //will not work with common browsers, but will work with electron
       }, 500);
+    });
+  </script>
+  <script type="text/javascript" src="record.json">
+    console.log("AA");
+    let recordButton = document.querySelector('#record');
+    recordButton.addEventListener('click', () => {
+      console.log("AA");
+      let mydata  = JSON.parse(data);
+      console.log(mydata);
     });
   </script>
 </body>

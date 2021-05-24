@@ -211,6 +211,7 @@ function StraightCheck() {
   // 1 0 1 1 1 1
   // 1 1 1 1 1 0 <-- 주사위값 6 체크할때 straight값을 0으로 처리해버리는 문제
   // 1 1 1 1 0 0
+
   for (let val of diceCounter.slice(1, 7)) {
     if (isStart === true && val === 0) straight = 0;
     if (val > 0) {
@@ -239,8 +240,12 @@ function endGame() {
   let finalScores = [];//최종 점수들 기록
   for (let i = 0; i < playerNum; i++)
     finalScores.push(parseInt(document.querySelector("#total" + playerList[i]).textContent));
-  let winnerScore = Math.max.apply(null, finalScores);//최고점 찾기
 
+  for(let j=0; j<playerNum; j++){
+    downloadCSV(finalScores[j]);
+  }
+
+  let winnerScore = Math.max.apply(null, finalScores);//최고점 찾기
   let winners = [];//최고점이랑 같은 점수 가진 사람들(동점자 발생 대비)
   let fromIndex = finalScores.indexOf(winnerScore);
   while (fromIndex != -1) {
@@ -249,12 +254,62 @@ function endGame() {
     fromIndex = finalScores.indexOf(winnerScore, fromIndex + 1);
   }
   console.log("winnerScore: "+winnerScore+" winners: "+winners);
-
+  
   document.querySelector("#winnerMsg").textContent = "플레이어 " + winners.join(', ') + "가 우승했습니다!";
   document.querySelector("#winnerScore").textContent = "최고점: " + winnerScore + "점";
   let endPopup = document.querySelector("#endPopup")
   endPopup.classList.remove("popupClose");
   endPopup.classList.add("fade-in");
+}
+
+function downloadCSV(fis){
+  var dd = new Date();//점수 JSON파일에 기록
+  console.log(dd.getFullYear());
+  console.log(dd.getMonth());
+  console.log(dd.getDate());
+
+  const fs = require('electron');
+
+  const record ={
+    score: fis,
+    year:dd.getFullYear(),
+    month:dd.getMonth(),
+    date:dd.getDate()
+  };
+
+  const Rec = JSON.stringify(record);
+  fs.writeFileSync('records.json',Rec);
+  console.log(Rec);
+
+  /*
+  var array = [];
+  array.push({score: sc, year: dd.getFullYear(), month: dd.getMonth(), date: dd.getDate()});
+
+  var a = "";
+  $.each(array, function(i, item){
+    a += item.score + "," + item.year + "," + item.month + "," + item.date + "," + "\r\n";
+  });
+
+  // jquery 사용하지 않는 경우
+   for(var i=0; i<array.length; i++){
+    a += array[i].name + "," + array[i].age + "," + array[i].test + "\r\n";
+  } 
+
+  var downloadLink = document.createElement("a");
+  console.log("AA");
+  console.log(downloadLink);
+  console.log("AA");
+  
+  var blob = new Blob([a], { type: "text/csv;charset=utf-8" });
+  var url = URL.createObjectURL(blob);
+  
+  downloadLink.href = url;
+  downloadLink.download = "record.csv";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  */
 }
 
 //listener
