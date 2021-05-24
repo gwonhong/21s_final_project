@@ -10,16 +10,6 @@
 
 <body class="fade-in">
   <div class="container">
-    <button id="backtomain" type="button" class="btn btn-primary btn">메인메뉴로 돌아가기</button>
-    <script>
-      let backtomainButton = document.querySelector('#backtomain');
-      backtomainButton.addEventListener('click', () => {
-        document.querySelector('body').classList.add('fade-out');
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 500);
-      });
-    </script>
     <h1>기록</h1>
     <div id=menu class="w-50 shadow p-3 mb-5 rounded d-grid gap-2">
       <table class="table table-hover">
@@ -34,6 +24,16 @@
         </tbody>
       </table>
     </div>
+    <button id="backtomain" type="button" class="btn btn-primary btn-lg">메인메뉴로 돌아가기</button>
+    <script>
+      let backtomainButton = document.querySelector('#backtomain');
+      backtomainButton.addEventListener('click', () => {
+        document.querySelector('body').classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 500);
+      });
+    </script>
   </div>
   <script>
     let records = [];

@@ -65,11 +65,11 @@ td.active:hover{
 ul {
   padding-left: 0px;
   list-style: none;
-  overflow: auto;
+  overflow: hidden;
 } 
 ul li {
   float: left;
-  margin: 30px;
+  margin: 5px;
   align-items: center;
 }
 ul li i {
