@@ -60,8 +60,9 @@
 
     function loadRecords() {
       let lastRecords = localStorage.getItem("records");
-      if (!lastRecords) return;
-      records = JSON.parse(lastRecords);
+      if (lastRecords) {
+        records = JSON.parse(lastRecords);
+      }
       for (let i = 1; i <= 10; i++) {
         if (i <= records.length) {
           addToTable(i, records[i - 1]);
