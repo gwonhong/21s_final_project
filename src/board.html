@@ -16,7 +16,7 @@
   <div id="board">
     <div class="d-flex">
       <div id="diceboard" class="flex-grow-1" style="padding: 10px;">
-        <span style="font-size:40px;margin-left:16px;">주사위를 클릭하여 고정하세요!</span>
+        <span style="font-size:35px;margin-left:16px;">주사위를 클릭하여 고정하세요!</span>
         <ul>
           <li>
             <input type="checkbox" id="1dc" style="display: none;" />
@@ -40,19 +40,83 @@
           </li>
         </ul>
         <div class="d-flex">
-          <span id="chanceText" class="me-auto" style="font-size:40px;margin-left:16px;margin-top:-15px;">남은
+          <span id="chanceText" class="me-auto" style="font-size:35px;margin-left:16px;margin-top:-20px;">남은
             기회</span>
           <button id="rollButton" onclick="throwDices();" type="button" class="btn btn-primary btn-lg me-1"
-            style="height:50px;margin-top:-10px;">Let's Roll!</button>
+            style="height:50px;margin-top:-20px;">Let's Roll!</button>
           <span style="margin:8px;"></span>
         </div>
-
-
-        <script>
-          window.onload = function () {
-            init();
-          }
-        </script>
+        <div class="d-flex" style="margin-top:45px; margin-left:10px;margin-right:20px;">
+          <table class="table table-bordered" style="width: 180px;">
+            <thead>
+              <tr>
+                <th scope="col" style="width:30px;">Categories</th>
+                <th scope="col">설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-1-fill"></i>Aces</th>
+                <td><i class="bi bi-dice-1-fill"></i>들의 합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-2-fill"></i>Duces</th>
+                <td><i class="bi bi-dice-2-fill"></i>들의 합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-3-fill"></i>Trees</th>
+                <td><i class="bi bi-dice-3-fill"></i>들의 합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-4-fill"></i>Fours</th>
+                <td><i class="bi bi-dice-4-fill"></i>들의 합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-5-fill"></i>Fives</th>
+                <td><i class="bi bi-dice-5-fill"></i>들의 합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-dice-6-fill"></i>Sixes</th>
+                <td><i class="bi bi-dice-6-fill"></i>들의 합</td>
+              </tr>
+            </tbody>
+          </table>
+          <span style="margin:5px;"></span>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Categories</th>
+                <th scope="col">설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>Choice</th>
+                <td>주사위 5개의 총합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>4 of a Kind</th>
+                <td>주사위 4개의 눈이 동일할 때, 주사위 5개의 총합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>Full House</th>
+                <td>눈이 동일한 주사위가 각각 3개, 2개가 있을 때, 5개의 총합</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>Small Straight</th>
+                <td>주사위 4개의 눈이 이어지는 수일 때, 고정 15점</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>Large Straight</th>
+                <td>주사위 5개의 눈이 이어지는 수일 때, 고정 30점</td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="bi bi-border-all"></i>Yacht</th>
+                <td>주사위 5개의 눈이 모두 같을 때, 고정 50점</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div id="scoreboard">
@@ -88,7 +152,6 @@
               <th scope="row"><i class="bi bi-dice-6-fill me-1"></i>Sixes</th>
               <td id="SixesValA"></td>
             </tr>
-
           </tbody>
         </table>
 

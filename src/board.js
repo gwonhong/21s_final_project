@@ -115,8 +115,9 @@ function addCategories(i) {
 
 
 function countDice() {
-  for (let dice of diceVal)
+  for (let dice of diceVal){
     diceCounter[dice]++;
+  }
 }
 
 function eraser(eturn) {
@@ -158,7 +159,7 @@ function drawScore() {
 
   scoreSpace = document.querySelector("#fourofaKindVal" + player);
   scoreSpace.classList.add("active");
-  scoreSpace.textContent = (!(scoreSpace.classList.contains("confirm"))) && diceCounter.some(val => { val >= 4; }) ? choice : 0;
+  scoreSpace.textContent = (!(scoreSpace.classList.contains("confirm"))) && diceCounter.some(val => val >= 4) ? choice : 0;
 
   scoreSpace = document.querySelector("#FullhouseVal" + player);
   scoreSpace.classList.add("active");
@@ -260,7 +261,6 @@ function endGame() {
   let winners = [];//최고점이랑 같은 점수 가진 사람들(동점자 발생 대비)
   let fromIndex = finalScores.indexOf(winnerScore);
   while (fromIndex != -1) {
-    console.log(fromIndex);
     winners.push(playerList[fromIndex]);
     fromIndex = finalScores.indexOf(winnerScore, fromIndex + 1);
   }
@@ -272,8 +272,6 @@ function endGame() {
     score: winnerScore
   };
   saveRecords(record);
-
-  console.log("winnerScore: " + winnerScore + " winners: " + winners);
 
   document.querySelector("#winnerMsg").textContent = "플레이어 " + winners.join(', ') + "가 우승했습니다!";
   document.querySelector("#winnerScore").textContent = "최고점: " + winnerScore + "점";
@@ -298,7 +296,6 @@ function appendListener() {
         document.querySelector("#player" + playerList[whosTurn]).classList.remove("bg-primary");//현재턴 사람 지우기
         whosTurn = ++whosTurn % playerNum;
         document.querySelector("#player" + playerList[whosTurn]).classList.add("bg-primary");//자기턴인지 표시
-        // console.log("ClickedSpace: " + tagName + " now: " + turn + " next: " + playerList[whosTurn]);
         if (rolled > 2) {
           rollButton.disabled = false;
         }
@@ -312,4 +309,78 @@ function appendListener() {
       })
     }
   }
+}
+
+/*dice.js*/
+let diceIcon = [];
+let diceHold = [];
+let rolled = 0;
+let diceVal = [];
+let rollButton = document.getElementById("rollButton");
+let chanceText = document.getElementById("chanceText");
+let dices = document.querySelectorAll('label');
+
+diceIcon[0] = document.getElementById("1d")
+diceIcon[1] = document.getElementById("2d")
+diceIcon[2] = document.getElementById("3d")
+diceIcon[3] = document.getElementById("4d")
+diceIcon[4] = document.getElementById("5d")
+diceHold[0] = document.querySelector("#\\31 dc");
+diceHold[1] = document.querySelector("#\\32 dc");
+diceHold[2] = document.querySelector("#\\33 dc");
+diceHold[3] = document.querySelector("#\\34 dc");
+diceHold[4] = document.querySelector("#\\35 dc");
+
+function init() {
+  for (let i = 0; i < 5; i++) {
+    diceIcon[i].setAttribute("class", "bi bi-question-square");
+  }
+  for (let i = 0; i < 5; i++) {
+    diceHold[i].disabled = true;
+  }
+  chanceText.textContent = "총 3번 굴릴 수 있습니다!";
+  rolled = 0;
+}
+
+window.onload = function () {
+  init();
+}
+
+function throwDices() {
+  isTurn = false;
+  for (let i = 0; i < 5; i++) {
+    diceHold[i].disabled = false;
+  }
+  for (let i = 0; i < 5; i++) {
+    if (!diceHold[i].checked) {
+      let randomNum = 1 + Math.floor(Math.random() * 6);
+
+      /*drawface*/
+      diceIcon[i].setAttribute("class", "bi bi-dice-" + randomNum + "-fill");
+      diceVal[i] = randomNum;
+      dices[i].classList.add('rotate');
+    }
+  }
+  setTimeout(()=>{
+    dices.forEach(dice => dice.classList.remove('rotate'));
+  },500);
+  
+
+  rolled++;
+  if (rolled === 1) {
+    chanceText.textContent = "2번 남았습니다!";
+  }
+  else if (rolled === 2) {
+    chanceText.textContent = "1번 남았습니다!";
+  }
+  else if (rolled === 3) {
+    rollButton.disabled = true;
+    for (let i = 0; i < 5; i++) {
+      diceHold[i].setAttribute("disabled", "");
+    }
+    chanceText.textContent = "점수판에 클릭해서 기록해주세요!";
+  }
+  countDice();
+  drawScore();
+  isTurn = true;
 }
