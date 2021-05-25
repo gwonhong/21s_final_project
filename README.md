@@ -11,9 +11,9 @@
 
 ## 설치 방법
 - Windows
-Releases에 윈도우를 위한 exe 설치파일이 준비되어 있습니다. 설치 후 실행하셔서 재밌게 즐기시면 됩니다!
+: [Releases](https://github.com/gwonhong/21s_final_project/releases)에 윈도우를 위한 exe 설치파일이 준비되어 있습니다. 설치 후 실행하셔서 재밌게 즐기시면 됩니다!
 - 이외의 OS
-git clone을 하신 후, npm install electron을 통해 electron 설치 후에 터미널에 npm start를 입력해주시면 실행됩니다.
+: git clone을 하신 후, npm install electron을 통해 electron 설치 후에 터미널에 npm start를 입력해주시면 실행됩니다.
 
 ## 스크린샷
 - 메인메뉴
