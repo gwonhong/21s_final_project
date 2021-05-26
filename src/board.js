@@ -115,7 +115,7 @@ function addCategories(i) {
 
 
 function countDice() {
-  for (let dice of diceVal){
+  for (let dice of diceVal) {
     diceCounter[dice]++;
   }
 }
@@ -155,15 +155,17 @@ function drawScore() {
   let player = playerList[whosTurn];
   scoreSpace = document.querySelector("#ChoiceVal" + player);
   scoreSpace.classList.add("active");
-  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = choice;
+  if (scoreSpace.classList.contains("confirm") === false) scoreSpace.textContent = choice;
 
   scoreSpace = document.querySelector("#fourofaKindVal" + player);
   scoreSpace.classList.add("active");
-  scoreSpace.textContent = (!(scoreSpace.classList.contains("confirm"))) && diceCounter.some(val => val >= 4) ? choice : 0;
+  if (scoreSpace.classList.contains("confirm") === false) {
+    diceCounter.some(val => val >= 4) ? choice : 0;
+  };
 
   scoreSpace = document.querySelector("#FullhouseVal" + player);
   scoreSpace.classList.add("active");
-  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = fullhouseCheck();
+  if (scoreSpace.classList.contains("confirm") === false) scoreSpace.textContent = fullhouseCheck();
 
   straight = StraightCheck();
   if (straight === 30) {
@@ -175,10 +177,10 @@ function drawScore() {
   }
   scoreSpace = document.querySelector("#v" + 30 + player);
   scoreSpace.classList.add("active");
-  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = v30;
+  if (scoreSpace.classList.contains("confirm") === false) scoreSpace.textContent = v30;
   scoreSpace = document.querySelector("#v" + 15 + player);
   scoreSpace.classList.add("active");
-  if ((scoreSpace.classList.contains("confirm")) === false) scoreSpace.textContent = v15;
+  if (scoreSpace.classList.contains("confirm") === false) scoreSpace.textContent = v15;
 
   scoreSpace = document.querySelector("#Yacht" + player);
   scoreSpace.classList.add("active");
@@ -266,7 +268,7 @@ function endGame() {
   }
 
   let now = new Date();
-  let time = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes();
+  let time = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + ' ' + ("0" + now.getHours()).slice(-2) + ':' + ("0" + now.getMinutes()).slice(-2);//시, 분 한자리 일 때 앞에 0 채우기
   let record = {
     time: time,
     score: winnerScore
@@ -361,10 +363,10 @@ function throwDices() {
       dices[i].classList.add('rotate');
     }
   }
-  setTimeout(()=>{
+  setTimeout(() => {
     dices.forEach(dice => dice.classList.remove('rotate'));
-  },500);
-  
+  }, 500);
+
 
   rolled++;
   if (rolled === 1) {
