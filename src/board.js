@@ -160,7 +160,7 @@ function drawScore() {
   scoreSpace = document.querySelector("#fourofaKindVal" + player);
   scoreSpace.classList.add("active");
   if (scoreSpace.classList.contains("confirm") === false) {
-    diceCounter.some(val => val >= 4) ? choice : 0;
+    scoreSpace.textContent = diceCounter.some(val => val >= 4) ? choice : 0;
   };
 
   scoreSpace = document.querySelector("#FullhouseVal" + player);
@@ -184,7 +184,7 @@ function drawScore() {
 
   scoreSpace = document.querySelector("#Yacht" + player);
   scoreSpace.classList.add("active");
-  scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
+  if (scoreSpace.classList.contains("confirm") === false) scoreSpace.textContent = diceCounter.indexOf(5) > 0 ? 50 : 0;
 
   diceCounter = [0, 0, 0, 0, 0, 0, 0]; // 카운터 초기화
 }
