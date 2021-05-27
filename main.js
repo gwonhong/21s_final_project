@@ -8,7 +8,7 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
-  })
+  });
   win.setMenuBarVisibility(false);
   win.loadFile('./src/index.html')
 }
